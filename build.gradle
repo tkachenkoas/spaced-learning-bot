@@ -38,11 +38,6 @@ test {
     useJUnitPlatform()
 }
 
-
-task copyNativeDeps(type: Copy) {
-
-}
-
 task runLocalApp {
     bootRun.configure {
         classpath = configurations.localRun + sourceSets.main.runtimeClasspath
