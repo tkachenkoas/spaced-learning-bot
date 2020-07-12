@@ -1,0 +1,52 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+apply from: 'versions.gradle'
+
+group = 'com.atstudio'
+version = '1.0.1'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
+    maven { url 'https://jitpack.io' }
+}
+
+configurations {
+    localRun.extendsFrom implementation
+}
+
+dependencies {
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'com.github.tkachenkoas:telegram-bot-starter-kit:1.0.2'
+    localRun "de.flapdoodle.embed:de.flapdoodle.embed.mongo:$embeddedMongo"
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo:$embeddedMongo"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+task copyNativeDeps(type: Copy) {
+
+}
+
+task runLocalApp {
+    bootRun.configure {
+        classpath = configurations.localRun + sourceSets.main.runtimeClasspath
+        systemProperty "spring.profiles.active", 'local'
+    }
+    finalizedBy bootRun
+}
