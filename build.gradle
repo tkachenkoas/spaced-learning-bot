@@ -23,10 +23,15 @@ configurations {
 
 dependencies {
 
+    compileOnly "org.projectlombok:lombok:1.18.12"
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'com.github.tkachenkoas:telegram-bot-starter-kit:1.0.2'
     localRun "de.flapdoodle.embed:de.flapdoodle.embed.mongo:$embeddedMongo"
+
+    implementation 'org.apache.commons:commons-lang3:3.10'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -39,6 +44,7 @@ test {
 }
 
 task runLocalApp {
+    group = 'application'
     bootRun.configure {
         classpath = configurations.localRun + sourceSets.main.runtimeClasspath
         systemProperty "spring.profiles.active", 'local'
