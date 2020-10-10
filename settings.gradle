@@ -13,3 +13,5 @@ pluginManagement {
 	}
 }
 rootProject.name = 'spaced-learning-bot'
+include 'lb-application'
+include 'lb-telegram'

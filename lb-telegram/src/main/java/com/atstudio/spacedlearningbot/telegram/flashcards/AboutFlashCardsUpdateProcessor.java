@@ -1,7 +1,7 @@
 package com.atstudio.spacedlearningbot.telegram.flashcards;
 
-import com.atstudio.spacedlearningbot.telegram.SimpleInfoUpdateProcessor;
 import org.springframework.stereotype.Component;
+import com.atstudio.spacedlearningbot.telegram.SimpleInfoUpdateProcessor;
 
 import java.util.List;
 

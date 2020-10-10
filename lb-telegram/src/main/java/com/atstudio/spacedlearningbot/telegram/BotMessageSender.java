@@ -1,12 +1,11 @@
 package com.atstudio.spacedlearningbot.telegram;
 
+import com.atstudio.spacedlearningbot.utils.TgBotApiObjectsUtils;
 import com.atstudio.telegrambot.starterpack.api.TgApiExecutor;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-
-import static com.atstudio.spacedlearningbot.utils.TgBotApiObjectsUtils.getUpdateChatId;
 
 @AllArgsConstructor
 @Component
@@ -26,7 +25,7 @@ public class BotMessageSender {
 
     public void sendMessageToSourceChat(Update update, String message) {
         tgApiExecutor.execute(
-                new SendMessage(getUpdateChatId(update), message)
+                new SendMessage(TgBotApiObjectsUtils.getUpdateChatId(update), message)
         );
     }
 

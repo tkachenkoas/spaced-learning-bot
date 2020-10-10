@@ -1,3 +1,15 @@
+buildscript {
+    ext {
+        springBootVersion = '2.2.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.3.1.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
@@ -10,44 +22,73 @@ group = 'com.atstudio'
 version = '1.0.1'
 sourceCompatibility = '1.8'
 
-repositories {
-    mavenCentral()
-    maven { url 'https://repo.spring.io/milestone' }
-    maven { url 'https://repo.spring.io/snapshot' }
-    maven { url 'https://jitpack.io' }
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'checkstyle'
+    apply plugin: 'pmd'
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven { url 'https://jitpack.io' }
+    }
 }
 
-configurations {
-    localRun.extendsFrom implementation
-}
+def bootJarName = "spaced-learning-bot.jar"
+bootJar.enabled = false
 
+def buildTaskRequests = gradle.startParameter.taskRequests
+def onlyScApplicationTest = buildTaskRequests.size() == 1 &&
+        buildTaskRequests[0].args[0] == ':sc-application:test'
+
+subprojects {
+
+    it.apply plugin: 'java'
+
+    if (it.name != 'application') {
+        bootJar.enabled = false
+        jar.enabled = true
+    } else {
+        // This is to make module (aka 'unit') tests run before application-level ('integration') tests
+        // However, if you run a single test from IDE, it should not trigger dependencies
+        if (!onlyScApplicationTest) {
+            def dependsOnModules = [':telegram']
+
+            for (def module: dependsOnModules) {
+                test.dependsOn "$module:test"
+            }
+        }
+
+        bootJar {
+            archiveFileName = "${bootJarName}"
+        }
+        springBoot {
+            buildInfo()
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    dependencies {
+        compileOnly "org.projectlombok:lombok:$lombokVer"
+        annotationProcessor "org.projectlombok:lombok:$lombokVer"
+
+        implementation 'org.apache.commons:commons-lang3:3.10'
+
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+}
 dependencies {
-
-    compileOnly "org.projectlombok:lombok:1.18.12"
-    annotationProcessor 'org.projectlombok:lombok:1.18.12'
-
-    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    implementation 'com.github.tkachenkoas:telegram-bot-starter-kit:1.0.2'
-    localRun "de.flapdoodle.embed:de.flapdoodle.embed.mongo:$embeddedMongo"
 
-    implementation 'org.apache.commons:commons-lang3:3.10'
-
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
     testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo:$embeddedMongo"
-}
-
-test {
-    useJUnitPlatform()
-}
-
-task runLocalApp {
-    group = 'application'
-    bootRun.configure {
-        classpath = configurations.localRun + sourceSets.main.runtimeClasspath
-        systemProperty "spring.profiles.active", 'local'
-    }
-    finalizedBy bootRun
 }

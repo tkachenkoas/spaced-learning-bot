@@ -1,3 +1,4 @@
 ext {
     embeddedMongo = '2.2.0'
+    lombokVer = '1.18.12'
 }

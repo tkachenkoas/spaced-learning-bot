@@ -1,0 +1,20 @@
+configurations {
+    localRun.extendsFrom implementation
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    implementation project(path: ':lb-telegram', configuration: 'default')
+
+    localRun "de.flapdoodle.embed:de.flapdoodle.embed.mongo:$embeddedMongo"
+}
+
+task runLocalApp {
+    group = 'application'
+    bootRun.configure {
+        classpath = configurations.localRun + sourceSets.main.runtimeClasspath
+        systemProperty "spring.profiles.active", 'local'
+    }
+    finalizedBy bootRun
+}
