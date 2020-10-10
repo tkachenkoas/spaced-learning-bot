@@ -1,4 +1,5 @@
 
 dependencies {
     implementation 'com.github.tkachenkoas:telegram-bot-starter-kit:1.0.2'
+    implementation project(path: ':lb-service-api')
 }

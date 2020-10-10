@@ -1,13 +1,12 @@
 package com.atstudio.spacedlearningbot.telegram;
 
 import com.atstudio.spacedlearningbot.telegram.messages.BotMessageProvider;
-import com.atstudio.telegrambot.starterpack.api.UpdateProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 
-public abstract class AbstractMessageAwareUpdateProcessor implements UpdateProcessor {
+public abstract class AbstractMessageHandler {
 
     @Autowired
     private BotMessageProvider botMessageProvider;

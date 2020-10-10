@@ -8,11 +8,11 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 @Component
-public class AboutFlashCardsUpdateProcessor extends SimpleInfoUpdateProcessor {
+public class AboutRepeatIntervalsUpdateProcessor extends SimpleInfoUpdateProcessor {
 
     @Override
     public List<String> applicableCommands() {
-        return asList("/flashcards");
+        return asList("/about_flashcards_intervals -");
     }
 
     @Override

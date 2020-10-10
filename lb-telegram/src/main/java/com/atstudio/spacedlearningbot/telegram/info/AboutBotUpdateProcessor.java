@@ -16,13 +16,13 @@ import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils
 public class AboutBotUpdateProcessor extends SimpleInfoUpdateProcessor {
 
     @Override
-    protected List<String> applicableCommands() {
+    public List<String> applicableCommands() {
         return Arrays.asList("/start", "/help", "/about");
     }
 
 
     @Override
-    public void processUpdate(Update update) {
+    public void process(Update update) {
         sendMessage(
                 new SendMessage(
                         getUpdateChatId(update), provideMessageText(messageCode())

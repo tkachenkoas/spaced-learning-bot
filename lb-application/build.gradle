@@ -3,8 +3,6 @@ configurations {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-
     implementation project(path: ':lb-telegram', configuration: 'default')
 
     localRun "de.flapdoodle.embed:de.flapdoodle.embed.mongo:$embeddedMongo"

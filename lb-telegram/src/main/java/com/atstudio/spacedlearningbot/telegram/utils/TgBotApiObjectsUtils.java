@@ -7,7 +7,7 @@ import static java.util.Optional.ofNullable;
 
 public class TgBotApiObjectsUtils {
 
-    public static String geUpdateMessage(Update update) {
+    public static String getUpdateMessage(Update update) {
         return ofNullable(update.getMessage())
                 .map(Message::getText)
                 .orElse(null);
