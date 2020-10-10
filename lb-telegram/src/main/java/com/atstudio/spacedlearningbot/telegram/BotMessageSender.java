@@ -1,6 +1,6 @@
 package com.atstudio.spacedlearningbot.telegram;
 
-import com.atstudio.spacedlearningbot.utils.TgBotApiObjectsUtils;
+import com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils;
 import com.atstudio.telegrambot.starterpack.api.TgApiExecutor;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

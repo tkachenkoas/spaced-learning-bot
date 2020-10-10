@@ -1,4 +1,4 @@
-package com.atstudio.spacedlearningbot.service;
+package com.atstudio.spacedlearningbot.telegram.messages;
 
 public interface BotMessageProvider {
 

@@ -1,4 +1,4 @@
-package com.atstudio.spacedlearningbot.utils;
+package com.atstudio.spacedlearningbot.telegram.utils;
 
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;

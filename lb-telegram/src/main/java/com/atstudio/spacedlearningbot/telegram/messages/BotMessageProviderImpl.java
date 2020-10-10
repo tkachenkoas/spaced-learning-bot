@@ -1,4 +1,4 @@
-package com.atstudio.spacedlearningbot.service;
+package com.atstudio.spacedlearningbot.telegram.messages;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;

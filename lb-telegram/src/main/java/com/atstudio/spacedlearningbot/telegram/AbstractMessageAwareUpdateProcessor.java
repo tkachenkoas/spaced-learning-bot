@@ -1,6 +1,6 @@
 package com.atstudio.spacedlearningbot.telegram;
 
-import com.atstudio.spacedlearningbot.service.BotMessageProvider;
+import com.atstudio.spacedlearningbot.telegram.messages.BotMessageProvider;
 import com.atstudio.telegrambot.starterpack.api.UpdateProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

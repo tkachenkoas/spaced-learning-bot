@@ -1,6 +1,6 @@
 package com.atstudio.spacedlearningbot.telegram;
 
-import com.atstudio.spacedlearningbot.utils.TgBotApiObjectsUtils;
+import com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.telegram.telegrambots.meta.api.objects.Update;
 

@@ -1,4 +1,4 @@
-package com.atstudio.spacedlearningbot.config;
+package com.atstudio.spacedlearningbot.telegram.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
 @Configuration
-public class GeneralBeansConfig {
+public class MessageSourceConfig {
 
     @Bean
     public MessageSource messageSource() {
