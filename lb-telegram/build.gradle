@@ -1,5 +1,10 @@
 
 dependencies {
-    implementation 'com.github.tkachenkoas:telegram-bot-starter-kit:1.0.2'
+    implementation project(path: ':lb-domain')
     implementation project(path: ':lb-service-api')
+
+    implementation 'com.github.tkachenkoas:telegram-bot-starter-kit:1.0.2'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation "org.ehcache:ehcache:$ehCacheVersion"
+    implementation "javax.cache:cache-api:$javaCacheApi"
 }

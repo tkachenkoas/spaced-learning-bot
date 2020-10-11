@@ -1,4 +1,4 @@
-package com.atstudio.spacedlearningbot.telegram.updateprocessors;
+package com.atstudio.spacedlearningbot.telegram.updateprocessors.command;
 
 import com.atstudio.telegrambot.starterpack.api.UpdateProcessor;
 import lombok.AllArgsConstructor;
