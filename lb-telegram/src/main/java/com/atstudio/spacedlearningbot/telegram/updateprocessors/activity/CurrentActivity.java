@@ -1,11 +1,15 @@
 package com.atstudio.spacedlearningbot.telegram.updateprocessors.activity;
 
-import lombok.Value;
+import lombok.*;
 
 import java.util.Map;
 
-@Value
+@Data
+@Builder
+@AllArgsConstructor
+@With
+@NoArgsConstructor
 public class CurrentActivity {
-    ActivityType activityType;
-    Map<String, Object> details;
+    private ActivityType activityType;
+    private Map<String, Object> details;
 }

@@ -14,6 +14,7 @@ import javax.cache.CacheManager;
 import javax.cache.spi.CachingProvider;
 import java.time.Duration;
 
+import static com.atstudio.spacedlearningbot.telegram.config.CacheRegions.CURRENT_ACTIVITY;
 import static java.time.Duration.ofSeconds;
 
 @Configuration
@@ -24,7 +25,7 @@ public class CacheConfiguration {
     public JCacheCacheManager collectionsCacheManager() {
         CachingProvider provider = new EhcacheCachingProvider();
         CacheManager cacheManager = provider.getCacheManager();
-        cacheManager.createCache(CacheRegions.CURRENT_ACTIVITY.name(), createConfiguration(ofSeconds(300)));
+        cacheManager.createCache(CURRENT_ACTIVITY.name(), createConfiguration(ofSeconds(300)));
         return new JCacheCacheManager(cacheManager);
     }
 

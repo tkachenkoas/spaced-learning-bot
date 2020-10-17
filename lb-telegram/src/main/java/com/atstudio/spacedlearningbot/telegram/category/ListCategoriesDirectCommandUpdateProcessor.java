@@ -7,8 +7,8 @@ import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.Activit
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.ActivityCallbackSerializer;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.ActivityType;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.command.DirectCommandUpdateProcessor;
-import com.atstudio.telegrambot.starterpack.api.TgApiExecutor;
-import lombok.RequiredArgsConstructor;
+import com.github.tkachenkoas.telegramstarter.api.TgApiExecutor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -26,7 +26,7 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 @Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ListCategoriesDirectCommandUpdateProcessor implements DirectCommandUpdateProcessor {
 
     private static final String STUDY_EMOJI = parseToUnicode(":man_student:");

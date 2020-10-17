@@ -1,6 +1,6 @@
 package com.atstudio.spacedlearningbot.telegram.updateprocessors.command;
 
-import com.atstudio.telegrambot.starterpack.api.UpdateProcessor;
+import com.github.tkachenkoas.telegramstarter.api.RootUpdateHandler;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +15,7 @@ import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils
 @Component
 @Slf4j
 @AllArgsConstructor
-public class DirectCommandUpdateHandler implements UpdateProcessor {
+public class DirectCommandUpdateHandler implements RootUpdateHandler {
 
     private final List<DirectCommandUpdateProcessor> directCommandUpdateProcessors;
 
@@ -25,7 +25,7 @@ public class DirectCommandUpdateHandler implements UpdateProcessor {
     }
 
     @Override
-    public void processUpdate(Update update) {
+    public void handle(Update update) {
         String directCommand = extractCommand(update);
         for (DirectCommandUpdateProcessor commandUpdateProcessor : directCommandUpdateProcessors) {
             List<String> commands = commandUpdateProcessor.applicableCommands();
@@ -35,6 +35,11 @@ public class DirectCommandUpdateHandler implements UpdateProcessor {
             }
         }
         log.warn("Wasn't able to process direct command {} from update {}", directCommand, update);
+    }
+
+    @Override
+    public int getOrder() {
+        return 0;
     }
 
     private String extractCommand(Update update) {

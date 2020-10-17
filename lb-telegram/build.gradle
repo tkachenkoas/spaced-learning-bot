@@ -3,7 +3,7 @@ dependencies {
     implementation project(path: ':lb-domain', configuration: 'default')
     implementation project(path: ':lb-service-api', configuration: 'default')
 
-    implementation 'com.github.tkachenkoas:telegram-bot-starter-kit:1.0.2'
+    implementation 'com.github.tkachenkoas:telegram-bot-starter-kit:1.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation "org.ehcache:ehcache:$ehCacheVersion"
     implementation "javax.cache:cache-api:$javaCacheApi"
