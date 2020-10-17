@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.List;
 
-import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils.getUpdateMessage;
+import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils.getMessage;
 
 
 @Component
@@ -21,7 +21,7 @@ public class DirectCommandUpdateHandler implements UpdateProcessor {
 
     @Override
     public boolean applicableFor(Update update) {
-        return StringUtils.startsWith(getUpdateMessage(update), "/");
+        return StringUtils.startsWith(getMessage(update), "/");
     }
 
     @Override
@@ -38,6 +38,6 @@ public class DirectCommandUpdateHandler implements UpdateProcessor {
     }
 
     private String extractCommand(Update update) {
-        return getUpdateMessage(update).replace("/", "").split(" ")[0];
+        return getMessage(update).replace("/", "").split(" ")[0];
     }
 }

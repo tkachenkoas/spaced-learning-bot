@@ -7,13 +7,13 @@ import static java.util.Optional.ofNullable;
 
 public class TgBotApiObjectsUtils {
 
-    public static String getUpdateMessage(Update update) {
+    public static String getMessage(Update update) {
         return ofNullable(update.getMessage())
                 .map(Message::getText)
                 .orElse(null);
     }
 
-    public static Long getUpdateChatId(Update update) {
+    public static Long getChatId(Update update) {
         return ofNullable(update.getMessage())
                 .map(Message::getChatId)
                 .orElse(null);

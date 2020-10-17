@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
+    private String id;
+    private String chatScopedId;
     private String name;
-    private String alias;
 }
