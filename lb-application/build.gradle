@@ -5,6 +5,7 @@ configurations {
 dependencies {
     implementation project(path: ':lb-domain', configuration: 'default')
     implementation project(path: ':lb-service-impl', configuration: 'default')
+    implementation project(path: ':lb-data-firebase', configuration: 'default')
     implementation project(path: ':lb-telegram', configuration: 'default')
 
     localRun "de.flapdoodle.embed:de.flapdoodle.embed.mongo:$embeddedMongo"

@@ -1,15 +1,18 @@
 package com.atstudio.spacedlearningbot.telegram.updateprocessors.command;
 
+import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.api.ActivityFinishedEvent;
 import com.github.tkachenkoas.telegramstarter.api.RootUpdateHandler;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.List;
 
-import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils.getMessage;
+import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils.getChatId;
+import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils.getMessageText;
 
 
 @Component
@@ -18,10 +21,11 @@ import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils
 public class DirectCommandUpdateHandler implements RootUpdateHandler {
 
     private final List<DirectCommandUpdateProcessor> directCommandUpdateProcessors;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     public boolean applicableFor(Update update) {
-        return StringUtils.startsWith(getMessage(update), "/");
+        return StringUtils.startsWith(getMessageText(update), "/");
     }
 
     @Override
@@ -30,6 +34,10 @@ public class DirectCommandUpdateHandler implements RootUpdateHandler {
         for (DirectCommandUpdateProcessor commandUpdateProcessor : directCommandUpdateProcessors) {
             List<String> commands = commandUpdateProcessor.applicableCommands();
             if (commands.contains(directCommand)) {
+                // any direct command execution will abort previous activity
+                eventPublisher.publishEvent(
+                        new ActivityFinishedEvent(getChatId(update))
+                );
                 commandUpdateProcessor.process(update);
                 return;
             }
@@ -43,6 +51,6 @@ public class DirectCommandUpdateHandler implements RootUpdateHandler {
     }
 
     private String extractCommand(Update update) {
-        return getMessage(update).replace("/", "").split(" ")[0];
+        return getMessageText(update).replace("/", "").split(" ")[0];
     }
 }

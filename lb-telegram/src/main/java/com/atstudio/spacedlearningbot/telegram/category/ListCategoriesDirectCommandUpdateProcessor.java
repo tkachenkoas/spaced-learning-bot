@@ -3,9 +3,9 @@ package com.atstudio.spacedlearningbot.telegram.category;
 import com.atstudio.spacedlearningbot.domain.Category;
 import com.atstudio.spacedlearningbot.service.ICategoryService;
 import com.atstudio.spacedlearningbot.telegram.messages.BotMessageProvider;
-import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.ActivityCallback;
-import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.ActivityCallbackSerializer;
-import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.ActivityType;
+import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityCallback;
+import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityCallbackSerializer;
+import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityType;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.command.DirectCommandUpdateProcessor;
 import com.github.tkachenkoas.telegramstarter.api.TgApiExecutor;
 import lombok.AllArgsConstructor;
@@ -18,8 +18,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.Arrays;
 import java.util.List;
 
-import static com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.ActivityType.ADD_FLASHCARDS;
-import static com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.ActivityType.REPEAT_FLASHCARDS;
+import static com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityType.ADD_FLASHCARDS;
+import static com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityType.REPEAT_FLASHCARDS;
 import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils.getChatId;
 import static com.vdurmont.emoji.EmojiParser.parseToUnicode;
 import static java.util.Arrays.asList;

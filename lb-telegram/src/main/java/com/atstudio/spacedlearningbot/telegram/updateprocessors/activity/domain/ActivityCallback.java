@@ -1,4 +1,4 @@
-package com.atstudio.spacedlearningbot.telegram.updateprocessors.activity;
+package com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

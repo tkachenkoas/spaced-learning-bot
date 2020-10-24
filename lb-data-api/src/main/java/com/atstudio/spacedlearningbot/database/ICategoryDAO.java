@@ -1,10 +1,10 @@
-package com.atstudio.spacedlearningbot.service;
+package com.atstudio.spacedlearningbot.database;
 
 import com.atstudio.spacedlearningbot.domain.Category;
 
 import java.util.List;
 
-public interface ICategoryService {
+public interface ICategoryDAO {
 
     Category createCategory(Long chatId, Category category);
 
