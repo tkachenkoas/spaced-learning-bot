@@ -22,9 +22,8 @@ public class ICategoryDAOImpl implements ICategoryDAO {
     @SneakyThrows
     public Category createCategory(Long chatId, Category category) {
         CategoryEntity entity = CategoryEntity.fromCategory(category, chatId);
-        ApiFuture<WriteResult> future = getCategoriesCollection().document(entity.getId())
-                .set(category);
-        future.get();
+        getCategoriesCollection().document(entity.getId()).set(entity)
+                .get();
         return entity.toCategory();
     }
 

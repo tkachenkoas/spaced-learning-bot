@@ -15,9 +15,6 @@ public class FirebaseConfig {
         var options = FirestoreOptions.getDefaultInstance()
                 .toBuilder()
                 .setProjectId("dummy-project-id");
-        var firestoreUrl = System.getenv("FIRESTORE_EMULATOR_HOST");
-        options.setHost(firestoreUrl);
-        options.setCredentialsProvider(null);
         return options.build().getService();
     }
 
