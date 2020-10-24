@@ -36,7 +36,7 @@ public class CurrentActivityOperationUpdateHandler implements RootUpdateHandler 
     public void handle(Update update) {
         Long chatId = getChatId(update);
         CurrentActivity activity = currentActivitySessionManager.getCurrentActivityForChat(chatId);
-        CurrentActivityFlowUpdateProcessor flowUpdateProcessor = currentFlowProcessors.get(activity);
+        CurrentActivityFlowUpdateProcessor flowUpdateProcessor = currentFlowProcessors.get(activity.getActivityType());
         flowUpdateProcessor.processUpdateForCurrentActivity(update, activity);
     }
 

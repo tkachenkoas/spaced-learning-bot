@@ -38,7 +38,7 @@ public class ListCategoriesDirectCommandUpdateProcessor implements DirectCommand
 
     @Override
     public List<String> applicableCommands() {
-        return asList("flashcards_list");
+        return asList("/flashcards_list");
     }
 
     @Override

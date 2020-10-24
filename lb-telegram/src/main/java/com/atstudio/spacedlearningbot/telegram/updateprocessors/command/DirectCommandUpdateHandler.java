@@ -30,7 +30,7 @@ public class DirectCommandUpdateHandler implements RootUpdateHandler {
 
     @Override
     public void handle(Update update) {
-        String directCommand = extractCommand(update);
+        String directCommand = getMessageText(update);
         for (DirectCommandUpdateProcessor commandUpdateProcessor : directCommandUpdateProcessors) {
             List<String> commands = commandUpdateProcessor.applicableCommands();
             if (commands.contains(directCommand)) {
@@ -48,9 +48,5 @@ public class DirectCommandUpdateHandler implements RootUpdateHandler {
     @Override
     public int getOrder() {
         return 0;
-    }
-
-    private String extractCommand(Update update) {
-        return getMessageText(update).replace("/", "").split(" ")[0];
     }
 }
