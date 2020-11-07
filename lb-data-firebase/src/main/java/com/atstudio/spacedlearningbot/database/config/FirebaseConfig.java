@@ -14,7 +14,7 @@ public class FirebaseConfig {
     public Firestore firestore() {
         var options = FirestoreOptions.getDefaultInstance()
                 .toBuilder()
-                .setProjectId("dummy-project-id");
+                .setProjectId("spaced-learning-bot");
         return options.build().getService();
     }
 
