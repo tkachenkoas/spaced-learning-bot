@@ -12,7 +12,7 @@ public class AboutRepeatIntervalsUpdateProcessor extends SimpleInfoUpdateProcess
 
     @Override
     public List<String> applicableCommands() {
-        return asList("/about_flashcards_intervals -");
+        return asList("/about_flashcards_intervals");
     }
 
     @Override

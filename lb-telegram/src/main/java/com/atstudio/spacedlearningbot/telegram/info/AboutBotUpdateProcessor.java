@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils.getUpdateChatId;
+import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils.getChatId;
 
 @AllArgsConstructor
 @Component
@@ -25,7 +25,7 @@ public class AboutBotUpdateProcessor extends SimpleInfoUpdateProcessor {
     public void process(Update update) {
         sendMessage(
                 new SendMessage(
-                        getUpdateChatId(update), provideMessageText(messageCode())
+                        getChatId(update), provideMessageText(messageCode())
                 ).setParseMode("MarkdownV2")
         );
     }
