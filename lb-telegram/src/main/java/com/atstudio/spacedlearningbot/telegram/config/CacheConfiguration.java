@@ -15,6 +15,7 @@ import javax.cache.spi.CachingProvider;
 import java.time.Duration;
 
 import static com.atstudio.spacedlearningbot.telegram.config.CacheRegions.CURRENT_ACTIVITY;
+import static com.atstudio.spacedlearningbot.telegram.config.CacheRegions.DELETE_CATEGORY;
 import static java.time.Duration.ofSeconds;
 
 @Configuration
@@ -26,6 +27,7 @@ public class CacheConfiguration {
         CachingProvider provider = new EhcacheCachingProvider();
         CacheManager cacheManager = provider.getCacheManager();
         cacheManager.createCache(CURRENT_ACTIVITY.name(), createConfiguration(ofSeconds(300)));
+        cacheManager.createCache(DELETE_CATEGORY.name(), createConfiguration(ofSeconds(10)));
         return new JCacheCacheManager(cacheManager);
     }
 

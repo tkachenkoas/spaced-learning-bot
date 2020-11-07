@@ -27,6 +27,11 @@ public class CategoryService implements ICategoryService {
         return categoryDAO.createCategory(chatId, category);
     }
 
+    @Override
+    public void deleteCategory(Long chatId, String categoryId) {
+        categoryDAO.deleteCategory(chatId, categoryId);
+    }
+
     private void validateCategory(Category category) {
         if (StringUtils.isBlank(category.getName())) {
             throw new ValidationException("Category name can not be blank");

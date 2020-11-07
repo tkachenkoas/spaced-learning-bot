@@ -9,4 +9,6 @@ public interface ICategoryService {
     Category createCategory(Long chatId, Category category);
 
     List<Category> getCategoriesForChat(Long chatId);
+
+    void deleteCategory(Long chatId, String categoryId);
 }

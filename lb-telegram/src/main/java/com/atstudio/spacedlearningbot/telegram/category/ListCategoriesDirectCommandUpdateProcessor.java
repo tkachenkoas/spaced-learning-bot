@@ -3,9 +3,6 @@ package com.atstudio.spacedlearningbot.telegram.category;
 import com.atstudio.spacedlearningbot.domain.Category;
 import com.atstudio.spacedlearningbot.service.ICategoryService;
 import com.atstudio.spacedlearningbot.telegram.messages.BotMessageProvider;
-import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityCallback;
-import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityCallbackSerializer;
-import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityType;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.command.DirectCommandUpdateProcessor;
 import com.github.tkachenkoas.telegramstarter.api.TgApiExecutor;
 import lombok.AllArgsConstructor;
@@ -15,22 +12,18 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityType.ADD_FLASHCARDS;
-import static com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityType.REPEAT_FLASHCARDS;
+import static com.atstudio.spacedlearningbot.telegram.category.CategoryUtils.keyboardButtonWithCategoryCallback;
+import static com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityType.LIST_CATEGORY_ACTIONS;
 import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils.getChatId;
-import static com.vdurmont.emoji.EmojiParser.parseToUnicode;
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
 @Component
 @AllArgsConstructor
 public class ListCategoriesDirectCommandUpdateProcessor implements DirectCommandUpdateProcessor {
-
-    private static final String STUDY_EMOJI = parseToUnicode(":man_student:");
-    private static final String ADD_EMOJI = parseToUnicode(":heavy_plus_sign:");
 
     private final ICategoryService categoryService;
     private final TgApiExecutor executor;
@@ -52,7 +45,7 @@ public class ListCategoriesDirectCommandUpdateProcessor implements DirectCommand
             return;
         }
 
-        String message = messageProvider.getMessage("categories_list_actions", STUDY_EMOJI, ADD_EMOJI);
+        String message = messageProvider.getMessage("categories_list_info");
 
         executor.execute(
                 new SendMessage(chatId, message).setReplyMarkup(
@@ -70,21 +63,10 @@ public class ListCategoriesDirectCommandUpdateProcessor implements DirectCommand
     }
 
     private List<InlineKeyboardButton> toKeyboardMarkup(Category category) {
-        return Arrays.asList(
-                new InlineKeyboardButton(category.getName() + STUDY_EMOJI)
-                        .setCallbackData(
-                                categoryActivityCallback(category, REPEAT_FLASHCARDS)
-                        ),
-                new InlineKeyboardButton(ADD_EMOJI)
-                        .setCallbackData(
-                                categoryActivityCallback(category, ADD_FLASHCARDS)
-                        )
-        );
-    }
-
-    private String categoryActivityCallback(Category category, ActivityType activityType) {
-        return ActivityCallbackSerializer.serialize(
-                new ActivityCallback(activityType, category.getChatScopedId())
+        return singletonList(
+                keyboardButtonWithCategoryCallback(
+                        category.getName(), category.getChatScopedId(), LIST_CATEGORY_ACTIONS
+                )
         );
     }
 }

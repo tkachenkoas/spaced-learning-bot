@@ -9,7 +9,7 @@ public class ActivityCallbackSerializer {
     }
 
     public static ActivityCallback parse(String serialized) {
-        String[] split = serialized.split(SEPARATOR);
+        String[] split = serialized.split("\\" + SEPARATOR);
         return ActivityCallback.builder()
                 .activityType(ActivityType.forCode(Integer.parseInt(split[0])))
                 .payload(split[1])
