@@ -1,7 +1,6 @@
 package com.atstudio.spacedlearningbot.telegram.category;
 
 import com.atstudio.spacedlearningbot.service.ICategoryService;
-import com.atstudio.spacedlearningbot.telegram.config.CacheRegions;
 import com.atstudio.spacedlearningbot.telegram.messages.BotMessageProvider;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityCallback;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.callback.ActivityCallbackUpdateProcessor;
@@ -16,6 +15,7 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import static com.atstudio.spacedlearningbot.cache.CacheRegionStrings.DELETE_CATEGORY_ACTIVITY_CACHE;
 import static com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityType.DELETE_CATEGORY;
 import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils.getChatId;
 
@@ -36,17 +36,17 @@ public class DeleteCategoryActivityCallbackUpdateProcessor implements ActivityCa
 
     @Override
     public synchronized void process(Update update, ActivityCallback activityCallback) {
-        Cache deleteCategoryCache = cacheManager.getCache(CacheRegions.DELETE_CATEGORY.name());
+        Cache deleteCategoryActivity = cacheManager.getCache(DELETE_CATEGORY_ACTIVITY_CACHE);
         String categoryId = activityCallback.getPayload();
         Long chatId = getChatId(update);
         String tapCountKey = chatId + categoryId;
-        Integer tapCount = deleteCategoryCache.get(tapCountKey, Integer.class);
+        Integer tapCount = deleteCategoryActivity.get(tapCountKey, Integer.class);
         if (tapCount == null) {
-            deleteCategoryCache.put(tapCountKey, 1);
+            deleteCategoryActivity.put(tapCountKey, 1);
             return;
         }
         if (tapCount < 2) {
-            deleteCategoryCache.put(tapCountKey, tapCount + 1);
+            deleteCategoryActivity.put(tapCountKey, tapCount + 1);
             return;
         }
 

@@ -15,6 +15,7 @@ pluginManagement {
 rootProject.name = 'spaced-learning-bot'
 include 'lb-application'
 include 'lb-domain'
+include 'lb-common'
 include 'lb-telegram'
 include 'lb-service-api'
 include 'lb-service-impl'

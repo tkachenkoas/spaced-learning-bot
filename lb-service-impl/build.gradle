@@ -1,5 +1,6 @@
 dependencies {
     implementation project(path: ':lb-domain', configuration: 'default')
+    implementation project(path: ':lb-common', configuration: 'default')
     implementation project(path: ':lb-data-api', configuration: 'default')
     compile project(path: ':lb-service-api', configuration: 'default')
 

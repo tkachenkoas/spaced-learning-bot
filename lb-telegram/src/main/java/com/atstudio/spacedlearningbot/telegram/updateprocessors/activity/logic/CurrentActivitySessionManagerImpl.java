@@ -1,11 +1,12 @@
 package com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.logic;
 
-import com.atstudio.spacedlearningbot.telegram.config.CacheRegions;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.CurrentActivity;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
+
+import static com.atstudio.spacedlearningbot.cache.CacheRegionStrings.CURRENT_ACTIVITY_CACHE;
 
 @Component
 @AllArgsConstructor
@@ -29,6 +30,6 @@ public class CurrentActivitySessionManagerImpl implements CurrentActivitySession
     }
 
     private Cache getCurrentActivityCache() {
-        return cacheManager.getCache(CacheRegions.CURRENT_ACTIVITY.name());
+        return cacheManager.getCache(CURRENT_ACTIVITY_CACHE);
     }
 }

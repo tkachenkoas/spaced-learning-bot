@@ -1,4 +1,4 @@
-package com.atstudio.spacedlearningbot.telegram.config;
+package com.atstudio.spacedlearningbot.cache;
 
 import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.ExpiryPolicyBuilder;
@@ -13,9 +13,9 @@ import org.springframework.context.annotation.Configuration;
 import javax.cache.CacheManager;
 import javax.cache.spi.CachingProvider;
 import java.time.Duration;
+import java.util.Arrays;
 
-import static com.atstudio.spacedlearningbot.telegram.config.CacheRegions.CURRENT_ACTIVITY;
-import static com.atstudio.spacedlearningbot.telegram.config.CacheRegions.DELETE_CATEGORY;
+import static com.atstudio.spacedlearningbot.cache.CacheRegions.*;
 import static java.time.Duration.ofSeconds;
 
 @Configuration
@@ -26,8 +26,9 @@ public class CacheConfiguration {
     public JCacheCacheManager collectionsCacheManager() {
         CachingProvider provider = new EhcacheCachingProvider();
         CacheManager cacheManager = provider.getCacheManager();
-        cacheManager.createCache(CURRENT_ACTIVITY.name(), createConfiguration(ofSeconds(300)));
-        cacheManager.createCache(DELETE_CATEGORY.name(), createConfiguration(ofSeconds(10)));
+        Arrays.stream(values()).forEach(region -> cacheManager.createCache(
+                region.getCacheName(), createConfiguration(region.getDuration())
+        ));
         return new JCacheCacheManager(cacheManager);
     }
 

@@ -11,6 +11,7 @@ import lombok.SneakyThrows;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -38,6 +39,18 @@ public class ICategoryDAOImpl implements ICategoryDAO {
                 .map(doc -> doc.toObject(CategoryEntity.class))
                 .map(CategoryEntity::toCategory)
                 .collect(toList());
+    }
+
+    @Override
+    @SneakyThrows
+    public Optional<Category> getCategoryByChatScopedId(Long chatId, String categoryId) {
+        Query query = getCategoriesCollection()
+                .whereEqualTo("chatId", chatId)
+                .whereEqualTo("chatScopedId", categoryId);
+        List<QueryDocumentSnapshot> documents = query.get().get().getDocuments();
+        return documents.stream().findFirst()
+                .map(doc -> doc.toObject(CategoryEntity.class))
+                .map(CategoryEntity::toCategory);
     }
 
     @Override

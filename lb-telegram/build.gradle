@@ -1,12 +1,10 @@
 
 dependencies {
     implementation project(path: ':lb-domain', configuration: 'default')
+    implementation project(path: ':lb-common', configuration: 'default')
     implementation project(path: ':lb-service-api', configuration: 'default')
 
     implementation 'com.github.tkachenkoas:telegram-bot-starter-kit:1.1.1'
-    implementation 'org.springframework.boot:spring-boot-starter-cache'
-    implementation "org.ehcache:ehcache:$ehCacheVersion"
-    implementation "javax.cache:cache-api:$javaCacheApi"
 
     implementation 'com.vdurmont:emoji-java:5.1.1'
 }
