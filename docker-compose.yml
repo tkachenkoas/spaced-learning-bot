@@ -1,7 +1,10 @@
 version: "3.2"
 services:
-  firestore:
-    image: mtlynch/firestore-emulator
-    environment:
-      - FIRESTORE_PROJECT_ID=dummy-project-id
-      - PORT=8200
+  dynamodb:
+    image: amazon/dynamodb-local
+    hostname: dynamodb-local
+    container_name: dynamodb-local
+    volumes:
+      - ./db-data/:/home/dynamodblocal/data
+    ports:
+      - "8042:8000"
