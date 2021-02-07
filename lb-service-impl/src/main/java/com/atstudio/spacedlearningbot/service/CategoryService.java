@@ -38,10 +38,10 @@ public class CategoryService implements ICategoryService {
     @Override
     @Cacheable(
             cacheNames = CATEGORY_CACHE,
-            key = "#chatId+#cagetoryId"
+            key = "#chatId+#alias"
     )
-    public Category getCategoryByChatScopedId(Long chatId, String categoryId) {
-        return categoryDAO.getCategoryByChatScopedId(chatId, categoryId)
+    public Category getCategoryByAlias(Long chatId, String alias) {
+        return categoryDAO.getCategoryByAlias(chatId, alias)
                 .orElseThrow();
     }
 

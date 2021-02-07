@@ -7,6 +7,10 @@ dependencies {
     implementation project(path: ':lb-service-impl')
     implementation project(path: ':lb-data-dynamodb')
     implementation project(path: ':lb-telegram')
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
 }
 
 task runLocalApp {

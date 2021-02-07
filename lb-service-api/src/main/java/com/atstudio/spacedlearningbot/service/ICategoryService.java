@@ -12,5 +12,5 @@ public interface ICategoryService {
 
     void deleteCategory(Long chatId, String categoryId);
 
-    Category getCategoryByChatScopedId(Long chatId, String categoryId);
+    Category getCategoryByAlias(Long chatId, String categoryId);
 }

@@ -113,6 +113,9 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation 'org.springframework.boot:spring-boot-starter-logging'
 
+        testCompileOnly "org.projectlombok:lombok:$lombokVer"
+        testAnnotationProcessor "org.projectlombok:lombok:$lombokVer"
+
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }

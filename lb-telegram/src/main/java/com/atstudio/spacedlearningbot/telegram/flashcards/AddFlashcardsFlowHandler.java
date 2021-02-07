@@ -29,7 +29,7 @@ import static com.atstudio.spacedlearningbot.telegram.utils.TgBotApiObjectsUtils
 @RequiredArgsConstructor
 public class AddFlashcardsFlowHandler implements CurrentActivityFlowUpdateProcessor, ActivityInitializer {
 
-    private static final String CATEGORY_ID = "CATEGORY_ID";
+    private static final String CATEGORY_ALIAS = "CATEGORY_ALIAS";
 
     private final TgApiExecutor executor;
     private final BotMessageProvider messageProvider;
@@ -56,7 +56,7 @@ public class AddFlashcardsFlowHandler implements CurrentActivityFlowUpdateProces
                 update.getCallbackQuery().getData()
         );
         String categoryId = activityCallback.getPayload();
-        currentActivity.getDetails().put(CATEGORY_ID, categoryId);
+        currentActivity.getDetails().put(CATEGORY_ALIAS, categoryId);
         eventPublisher.publishEvent(
                 new ActivityUpdatedEvent(getChatId(update), currentActivity)
         );
@@ -70,8 +70,8 @@ public class AddFlashcardsFlowHandler implements CurrentActivityFlowUpdateProces
         }
 
         Long chatId = getChatId(update);
-        Category category = categoryService.getCategoryByChatScopedId(
-                chatId, (String) currentActivity.getDetails().get(CATEGORY_ID)
+        Category category = categoryService.getCategoryByAlias(
+                chatId, (String) currentActivity.getDetails().get(CATEGORY_ALIAS)
         );
 
         flashCardService.addFlashCardToCategory(category, flashCard);

@@ -8,7 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
-    private String id;
-    private String chatScopedId;
+    private String alias;
     private String name;
 }

@@ -11,7 +11,7 @@ public interface ICategoryDAO {
 
     List<Category> getCategoriesForChat(Long chatId);
 
-    Optional<Category> getCategoryByChatScopedId(Long chatId, String categoryId);
+    Optional<Category> getCategoryByAlias(Long chatId, String alias);
 
-    void deleteCategory(Long chatId, String categoryId);
+    void deleteCategory(Long chatId, String alias);
 }

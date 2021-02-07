@@ -8,6 +8,7 @@ import lombok.SneakyThrows;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -34,9 +35,15 @@ public class ICategoryDAOImpl implements ICategoryDAO {
     }
 
     @Override
+    public Optional<Category> getCategoryByAlias(Long chatId, String alias) {
+        return repository.findByChatIdAndAlias(chatId, alias)
+                .map(CategoryEntity::toCategory);
+    }
+
+    @Override
     @SneakyThrows
-    public void deleteCategory(Long chatId, String categoryId) {
-        repository.deleteByChatIdAndId(chatId, categoryId);
+    public void deleteCategory(Long chatId, String alias) {
+        repository.deleteByChatIdAndAlias(chatId, alias);
     }
 
 }
