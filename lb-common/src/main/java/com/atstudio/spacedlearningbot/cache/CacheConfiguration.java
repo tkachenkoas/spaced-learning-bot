@@ -15,8 +15,7 @@ import javax.cache.spi.CachingProvider;
 import java.time.Duration;
 import java.util.Arrays;
 
-import static com.atstudio.spacedlearningbot.cache.CacheRegions.*;
-import static java.time.Duration.ofSeconds;
+import static com.atstudio.spacedlearningbot.cache.CacheRegions.values;
 
 @Configuration
 @EnableCaching
