@@ -1,7 +1,5 @@
-package com.atstudio.spacedlearningbot.database.repository;
+package com.atstudio.spacedlearningbot.database.entity.category;
 
-import com.atstudio.spacedlearningbot.database.entity.CategoryEntity;
-import com.atstudio.spacedlearningbot.database.entity.CategoryEntityPrimaryKey;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

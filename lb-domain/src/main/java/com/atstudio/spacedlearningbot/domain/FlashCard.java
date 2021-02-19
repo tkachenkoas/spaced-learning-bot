@@ -9,8 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FlashCard {
+    private String id;
     private RepetitionMode repetitionMode;
-    private String chatScopedId;
     private boolean biDirectional;
     private String left;
     private String right;

@@ -1,4 +1,4 @@
-package com.atstudio.spacedlearningbot.database.entity;
+package com.atstudio.spacedlearningbot.database.entity.category;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;

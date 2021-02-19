@@ -2,5 +2,7 @@ dependencies {
     compile project(path: ':lb-data-api')
 
     implementation 'io.github.boostchicken:spring-data-dynamodb:5.2.1'
-    implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.949'
+    implementation('com.amazonaws:aws-java-sdk-dynamodb:1.11.949') {
+        force = true
+    }
 }

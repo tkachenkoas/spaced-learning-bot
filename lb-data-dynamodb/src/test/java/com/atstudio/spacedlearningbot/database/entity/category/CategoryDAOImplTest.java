@@ -1,5 +1,6 @@
-package com.atstudio.spacedlearningbot.database;
+package com.atstudio.spacedlearningbot.database.entity.category;
 
+import com.atstudio.spacedlearningbot.database.ICategoryDAO;
 import com.atstudio.spacedlearningbot.domain.Category;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @DirtiesContext
-class ICategoryDAOImplTest {
+class CategoryDAOImplTest {
 
     @Autowired
     private ICategoryDAO underTest;
