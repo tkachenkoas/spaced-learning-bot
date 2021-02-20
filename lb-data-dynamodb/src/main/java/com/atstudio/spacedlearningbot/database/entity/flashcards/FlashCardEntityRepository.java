@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface FlashCardEntityRepository extends CrudRepository<FlashCardEntity, FlashCardEntityPrimaryKey> {
+public interface FlashCardEntityRepository extends CrudRepository<FlashCardEntity, String> {
 
     List<FlashCardEntity> findAllByCategoryAlias(String categoryAlias);
 

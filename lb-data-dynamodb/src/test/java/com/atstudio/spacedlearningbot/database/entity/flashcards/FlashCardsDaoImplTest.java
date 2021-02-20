@@ -31,6 +31,7 @@ class FlashCardsDaoImplTest {
                 .withRepetitionMode(SELF_CHECK);
 
         FlashCard flashCard = underTest.saveFlashCard(category, toSave);
+        assertThat(flashCard.getId()).isNotBlank();
 
         List<FlashCard> all = underTest.getAllForCategory(category);
 

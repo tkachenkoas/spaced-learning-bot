@@ -3,19 +3,14 @@ package com.atstudio.spacedlearningbot.database.entity.flashcards;
 import com.atstudio.spacedlearningbot.domain.Category;
 import com.atstudio.spacedlearningbot.domain.FlashCard;
 
-import java.util.UUID;
-
 import static com.atstudio.spacedlearningbot.database.entity.flashcards.RepetitionModeToCodeMapper.getCode;
 import static com.atstudio.spacedlearningbot.database.entity.flashcards.RepetitionModeToCodeMapper.getMode;
-import static java.util.Objects.requireNonNullElseGet;
 
 class FlashCardToEntityMapper {
 
     static FlashCardEntity toEntity(Category category, FlashCard flashCard) {
         FlashCardEntity result = new FlashCardEntity();
-        result.setFlashCardId(requireNonNullElseGet(
-                flashCard.getId(), () -> UUID.randomUUID().toString()
-        ));
+        result.setFlashCardId(flashCard.getId());
         result.setBiDirectional(flashCard.isBiDirectional());
         result.setCategoryAlias(category.getAlias());
         result.setRepetitionMode(getCode(flashCard.getRepetitionMode()));
