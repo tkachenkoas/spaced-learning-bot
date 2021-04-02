@@ -21,4 +21,7 @@ public class CategoryEntity {
     @DynamoDBAttribute(attributeName = "name")
     private String name;
 
+    public void setChatId(Long chatId) {
+        this.chatId = chatId;
+    }
 }
