@@ -1,6 +1,5 @@
-package com.atstudio.spacedlearningbot.database;
+package com.atstudio.spacedlearningbot.database.testconfig;
 
-import com.atstudio.spacedlearningbot.database.entity.DynamoDbStarter;
 import lombok.SneakyThrows;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.ComponentScan;

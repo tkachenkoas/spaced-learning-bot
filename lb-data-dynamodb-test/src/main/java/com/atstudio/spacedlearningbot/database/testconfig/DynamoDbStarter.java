@@ -1,9 +1,8 @@
-package com.atstudio.spacedlearningbot.database.entity;
+package com.atstudio.spacedlearningbot.database.testconfig;
 
 import com.amazonaws.services.dynamodbv2.local.main.ServerRunner;
 import com.amazonaws.services.dynamodbv2.local.server.DynamoDBProxyServer;
 import lombok.SneakyThrows;
-import org.apache.commons.cli.ParseException;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -18,7 +17,7 @@ public class DynamoDbStarter implements BeanFactoryPostProcessor {
         dynamoDbServer().start();
     }
 
-    public static DynamoDBProxyServer dynamoDbServer() throws ParseException {
+    public static DynamoDBProxyServer dynamoDbServer() throws Exception {
         return ServerRunner.createServerFromCommandLineArgs(new String[]{"-inMemory", "-port", "8084"});
     }
 

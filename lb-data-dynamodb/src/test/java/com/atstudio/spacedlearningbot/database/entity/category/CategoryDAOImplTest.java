@@ -1,6 +1,7 @@
 package com.atstudio.spacedlearningbot.database.entity.category;
 
 import com.atstudio.spacedlearningbot.database.ICategoryDAO;
+import com.atstudio.spacedlearningbot.database.testconfig.InMemoryDbTestContext;
 import com.atstudio.spacedlearningbot.domain.Category;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringBootTest(classes = InMemoryDbTestContext.class)
 class CategoryDAOImplTest {
 
     @Autowired
