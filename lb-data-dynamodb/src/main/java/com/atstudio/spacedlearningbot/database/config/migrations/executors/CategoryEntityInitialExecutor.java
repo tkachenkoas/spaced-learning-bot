@@ -25,6 +25,11 @@ public class CategoryEntityInitialExecutor implements MigrationExecutor {
     }
 
     @Override
+    public int getOrder() {
+        return 0;
+    }
+
+    @Override
     public void execute(AmazonDynamoDB dynamoDB) {
         CreateTableRequest createTableRequest = dynamoDBMapper.generateCreateTableRequest(CategoryEntity.class);
         createTableRequest.setProvisionedThroughput(

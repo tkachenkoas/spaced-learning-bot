@@ -26,6 +26,11 @@ public class FlashCardEntityInitialExecutor implements MigrationExecutor {
     }
 
     @Override
+    public int getOrder() {
+        return 1;
+    }
+
+    @Override
     public void execute(AmazonDynamoDB dynamoDB) {
         CreateTableRequest createTableRequest = dynamoDBMapper.generateCreateTableRequest(FlashCardEntity.class);
         createTableRequest.setProvisionedThroughput(
