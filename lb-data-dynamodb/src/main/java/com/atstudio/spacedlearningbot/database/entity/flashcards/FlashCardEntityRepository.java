@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface FlashCardEntityRepository extends CrudRepository<FlashCardEntity, String> {
 
-    List<FlashCardEntity> findAllByCategoryAlias(String categoryAlias);
+    List<FlashCardEntity> findAllByCategoryId(String categoryAlias);
 
 }

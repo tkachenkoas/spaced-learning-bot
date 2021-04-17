@@ -12,9 +12,9 @@ public class FlashCardEntity {
     @DynamoDBGeneratedUuid(DynamoDBAutoGenerateStrategy.CREATE)
     private String flashCardId;
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "CategoryAliasIndex")
-    @DynamoDBAttribute(attributeName = "categoryAlias")
-    private String categoryAlias;
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "CategoryIdIndex")
+    @DynamoDBAttribute(attributeName = "categoryId")
+    private String categoryId;
 
     @DynamoDBAttribute(attributeName = "biDirectional")
     private boolean biDirectional;

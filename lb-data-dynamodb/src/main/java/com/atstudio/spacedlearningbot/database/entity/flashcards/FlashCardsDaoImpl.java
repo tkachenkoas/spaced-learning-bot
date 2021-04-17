@@ -26,7 +26,7 @@ public class FlashCardsDaoImpl implements IFlashCardsDao {
 
     @Override
     public List<FlashCard> getAllForCategory(Category category) {
-        List<FlashCardEntity> entities = repository.findAllByCategoryAlias(category.getAlias());
+        List<FlashCardEntity> entities = repository.findAllByCategoryId(category.getId());
         return entities.stream()
                 .map(FlashCardToEntityMapper::toFlashCard)
                 .collect(Collectors.toList());

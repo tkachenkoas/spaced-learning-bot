@@ -12,7 +12,7 @@ class FlashCardToEntityMapper {
         FlashCardEntity result = new FlashCardEntity();
         result.setFlashCardId(flashCard.getId());
         result.setBiDirectional(flashCard.isBiDirectional());
-        result.setCategoryAlias(category.getAlias());
+        result.setCategoryId(category.getId());
         result.setRepetitionMode(getCode(flashCard.getRepetitionMode()));
         result.setLeft(flashCard.getLeft());
         result.setRight(flashCard.getRight());

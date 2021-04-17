@@ -21,7 +21,10 @@ class FlashCardsDaoImplTest {
 
     @Test
     void willSaveFlashCard() {
-        Category category = new Category().withName("some-name").withAlias("cat-alias");
+        Category category = new Category()
+                .withId("category-id")
+                .withName("some-name")
+                .withAlias("cat-alias");
 
         FlashCard toSave = new FlashCard()
                 .withBiDirectional(true)
