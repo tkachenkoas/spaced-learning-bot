@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.2.4.RELEASE'
+        springBootVersion = '2.4.2'
     }
     repositories {
         mavenCentral()
@@ -11,8 +11,8 @@ buildscript {
 }
 
 plugins {
-    id 'org.springframework.boot' version '2.3.1.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'org.springframework.boot' version '2.4.2'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
 }
 
@@ -36,6 +36,10 @@ allprojects {
         maven { url 'https://repo.spring.io/snapshot' }
         maven { url 'https://jitpack.io' }
     }
+
+    dependencies {
+        testImplementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.5.14'
+    }
 }
 
 def bootJarName = "spaced-learning-bot.jar"
@@ -49,6 +53,37 @@ subprojects {
 
     it.apply plugin: 'java'
 
+    if (it.name == 'lb-application' || it.name == 'lb-data-dynamodb') {
+        repositories {
+            maven {
+                url 'http://dynamodb-local.s3-website-us-west-2.amazonaws.com/release'
+            }
+        }
+
+        configurations {
+            dynamodb
+        }
+
+        dependencies {
+            testImplementation "com.amazonaws:DynamoDBLocal:$dynamoDbLocal"
+            //SQLite4Java, required by local DynamoDB
+            testImplementation group: 'com.almworks.sqlite4java', name: 'sqlite4java', version: '1.0.392'
+
+            dynamodb fileTree(dir: 'lib', include: ["*.dylib", "*.so", "*.dll"])
+            dynamodb "com.amazonaws:DynamoDBLocal:$dynamoDbLocal"
+        }
+
+        task copyNativeDeps(type: Copy) {
+            from configurations.dynamodb
+            into "$project.buildDir/libs/"
+        }
+
+        test {
+            dependsOn copyNativeDeps
+            systemProperty "java.library.path", 'build/libs'
+        }
+    }
+
     if (it.name != 'application') {
         bootJar.enabled = false
         jar.enabled = true
@@ -58,7 +93,7 @@ subprojects {
         if (!onlyScApplicationTest) {
             def dependsOnModules = [':telegram']
 
-            for (def module: dependsOnModules) {
+            for (def module : dependsOnModules) {
                 test.dependsOn "$module:test"
             }
         }
@@ -72,6 +107,7 @@ subprojects {
     }
 
     test {
+        systemProperty "spring.profiles.active", 'test'
         useJUnitPlatform()
     }
 
@@ -80,17 +116,16 @@ subprojects {
         annotationProcessor "org.projectlombok:lombok:$lombokVer"
 
         implementation 'org.apache.commons:commons-lang3:3.10'
+        implementation 'org.apache.commons:commons-collections4:4.1'
 
         implementation 'org.springframework.boot:spring-boot-starter'
         implementation 'org.springframework.boot:spring-boot-starter-logging'
+
+        testCompileOnly "org.projectlombok:lombok:$lombokVer"
+        testAnnotationProcessor "org.projectlombok:lombok:$lombokVer"
 
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }
     }
-}
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-
-    testImplementation "de.flapdoodle.embed:de.flapdoodle.embed.mongo:$embeddedMongo"
 }

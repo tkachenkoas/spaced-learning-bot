@@ -65,7 +65,7 @@ public class ListCategoriesDirectCommandUpdateProcessor implements DirectCommand
     private List<InlineKeyboardButton> toKeyboardMarkup(Category category) {
         return singletonList(
                 keyboardButtonWithCategoryCallback(
-                        category.getName(), category.getChatScopedId(), LIST_CATEGORY_ACTIONS
+                        category.getName(), category.getAlias(), LIST_CATEGORY_ACTIONS
                 )
         );
     }

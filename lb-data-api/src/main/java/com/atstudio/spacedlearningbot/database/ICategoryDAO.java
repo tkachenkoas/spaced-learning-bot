@@ -3,6 +3,7 @@ package com.atstudio.spacedlearningbot.database;
 import com.atstudio.spacedlearningbot.domain.Category;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ICategoryDAO {
 
@@ -10,5 +11,7 @@ public interface ICategoryDAO {
 
     List<Category> getCategoriesForChat(Long chatId);
 
-    void deleteCategory(Long chatId, String categoryId);
+    Optional<Category> getCategoryByAlias(Long chatId, String alias);
+
+    void deleteCategory(Long chatId, String alias);
 }

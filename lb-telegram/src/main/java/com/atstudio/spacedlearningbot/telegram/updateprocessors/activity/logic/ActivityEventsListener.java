@@ -35,11 +35,12 @@ public class ActivityEventsListener {
     public void handleNavigation(InitActivityEvent initialized) {
         ActivityType activityType = initialized.getActivityType();
         ActivityInitializer initializer = initializers.get(activityType);
+        CurrentActivity currentActivity = new CurrentActivity().withActivityType(activityType);
         currentActivitySessionManager.setActivityForChat(
                 getChatId(initialized.getUpdate()),
-                new CurrentActivity().withActivityType(activityType)
+                currentActivity
         );
-        initializer.initActivity(initialized.getUpdate());
+        initializer.initActivity(initialized.getUpdate(), currentActivity);
     }
 
     @EventListener

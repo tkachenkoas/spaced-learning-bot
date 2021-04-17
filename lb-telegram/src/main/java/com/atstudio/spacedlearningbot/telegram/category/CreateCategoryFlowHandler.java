@@ -34,7 +34,7 @@ public class CreateCategoryFlowHandler implements CurrentActivityFlowUpdateProce
     }
 
     @Override
-    public void initActivity(Update update) {
+    public void initActivity(Update update, CurrentActivity currentActivity) {
         executor.execute(new SendMessage(
                 getChatId(update),
                 messageProvider.getMessage("enter_category_name")

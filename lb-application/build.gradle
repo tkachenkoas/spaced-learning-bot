@@ -3,18 +3,20 @@ configurations {
 }
 
 dependencies {
-    implementation project(path: ':lb-domain', configuration: 'default')
-    implementation project(path: ':lb-service-impl', configuration: 'default')
-    implementation project(path: ':lb-data-firebase', configuration: 'default')
-    implementation project(path: ':lb-telegram', configuration: 'default')
+    implementation project(path: ':lb-domain')
+    implementation project(path: ':lb-service-impl')
+    implementation project(path: ':lb-data-dynamodb')
+    implementation project(path: ':lb-telegram')
 
-    localRun "de.flapdoodle.embed:de.flapdoodle.embed.mongo:$embeddedMongo"
+    testImplementation project(path: ':lb-data-dynamodb-test')
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
 }
 
 task runLocalApp {
     group = 'application'
     bootRun.configure {
-        classpath = configurations.localRun + sourceSets.main.runtimeClasspath
         systemProperty "spring.profiles.active", 'local'
     }
     finalizedBy bootRun

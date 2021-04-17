@@ -1,0 +1,16 @@
+repositories {
+    maven {
+        url 'http://dynamodb-local.s3-website-us-west-2.amazonaws.com/release'
+    }
+}
+
+dependencies {
+    compile project(path: ':lb-data-api')
+
+    implementation "com.amazonaws:DynamoDBLocal:$dynamoDbLocal"
+    implementation group: 'com.almworks.sqlite4java', name: 'sqlite4java', version: '1.0.392'
+    implementation 'io.github.boostchicken:spring-data-dynamodb:5.2.1'
+    implementation('com.amazonaws:aws-java-sdk-dynamodb:1.11.949') {
+        force = true
+    }
+}

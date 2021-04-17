@@ -1,6 +1,7 @@
 ext {
-    embeddedMongo = '2.2.0'
     lombokVer = '1.18.12'
     ehCacheVersion = '3.9.0'
     javaCacheApi = '1.1.1'
+
+    dynamoDbLocal = '1.11.477'
 }

@@ -1,0 +1,5 @@
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-cache'
+    implementation "org.ehcache:ehcache:$ehCacheVersion"
+    implementation "javax.cache:cache-api:$javaCacheApi"
+}
