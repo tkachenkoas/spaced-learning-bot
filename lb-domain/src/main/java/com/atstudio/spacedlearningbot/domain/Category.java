@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 public class Category {
     private String id;
+    private String ownerId;
     private String alias;
     private String name;
 }

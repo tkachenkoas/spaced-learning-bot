@@ -50,7 +50,7 @@ public class DeleteCategoryActivityCallbackUpdateProcessor implements ActivityCa
             return;
         }
 
-        categoryService.deleteCategory(chatId, categoryId);
+        categoryService.deleteCategory(chatId.toString(), categoryId);
         executor.execute(
                 new SendMessage(chatId, messageProvider.getMessage("deleted_category"))
         );

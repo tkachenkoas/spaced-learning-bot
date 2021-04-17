@@ -2,7 +2,9 @@ dependencies {
     implementation project(path: ':lb-domain', configuration: 'default')
     implementation project(path: ':lb-common', configuration: 'default')
     implementation project(path: ':lb-data-api', configuration: 'default')
+
     compile project(path: ':lb-service-api', configuration: 'default')
 
+    implementation 'org.springframework:spring-tx'
     implementation 'javax.validation:validation-api:2.0.1.Final'
 }

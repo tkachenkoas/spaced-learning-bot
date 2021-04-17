@@ -1,5 +1,5 @@
 package com.atstudio.spacedlearningbot.domain;
 
-public enum RepetitionMode {
-    SELF_CHECK;
+public enum ExcerciseType {
+    SELF_CHECK
 }

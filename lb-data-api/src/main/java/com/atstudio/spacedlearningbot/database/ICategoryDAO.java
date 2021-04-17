@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface ICategoryDAO {
 
-    Category createCategory(Long chatId, Category category);
+    Category createCategory(Category category);
 
-    List<Category> getCategoriesForChat(Long chatId);
+    List<Category> getCategoriesForUser(String ownerId);
 
-    Optional<Category> getCategoryByAlias(Long chatId, String alias);
+    Optional<Category> getCategoryByAlias(String ownerId, String alias);
 
-    void deleteCategory(Long chatId, String alias);
+    void deleteCategory(String ownerId, String alias);
 }

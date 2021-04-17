@@ -37,7 +37,7 @@ public class ListCategoriesDirectCommandUpdateProcessor implements DirectCommand
     @Override
     public void process(Update update) {
         Long chatId = getChatId(update);
-        List<Category> categories = categoryService.getCategoriesForChat(chatId);
+        List<Category> categories = categoryService.getCategories(chatId.toString());
         if (categories.isEmpty()) {
             executor.execute(
                     new SendMessage(chatId, messageProvider.getMessage("no_categories_yet"))

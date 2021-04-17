@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface ICategoryService {
 
-    Category createCategory(Long chatId, Category category);
+    Category createCategory(Category category);
 
-    List<Category> getCategoriesForChat(Long chatId);
+    List<Category> getCategories(String ownerId);
 
-    void deleteCategory(Long chatId, String categoryId);
+    void deleteCategory(String ownerId, String categoryId);
 
-    Category getCategoryByAlias(Long chatId, String categoryId);
+    Category getCategoryByAlias(String ownerId, String categoryId);
 }

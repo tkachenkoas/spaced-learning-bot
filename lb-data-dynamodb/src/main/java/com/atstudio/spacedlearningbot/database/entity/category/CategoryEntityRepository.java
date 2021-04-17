@@ -9,9 +9,9 @@ import java.util.Optional;
 @EnableScan
 public interface CategoryEntityRepository extends CrudRepository<CategoryEntity, String> {
 
-    List<CategoryEntity> findAllByChatId(Long chatId);
+    List<CategoryEntity> findAllByOwnerId(String ownerId);
 
-    void deleteByChatIdAndAlias(Long chatId, String alias);
+    void deleteByOwnerIdAndAlias(String ownerId, String alias);
 
-    Optional<CategoryEntity> findByChatIdAndAlias(Long chatId, String alias);
+    Optional<CategoryEntity> findByOwnerIdAndAlias(String ownerId, String alias);
 }

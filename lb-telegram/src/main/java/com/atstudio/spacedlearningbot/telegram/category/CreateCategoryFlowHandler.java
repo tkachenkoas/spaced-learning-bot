@@ -45,10 +45,9 @@ public class CreateCategoryFlowHandler implements CurrentActivityFlowUpdateProce
     public void processUpdateForCurrentActivity(Update update, CurrentActivity currentActivity) {
         // only applicable operation -> set name
         Category category = categoryService.createCategory(
-                getChatId(update),
                 new Category().withName(
                         getMessageText(update)
-                )
+                ).withOwnerId(String.valueOf(getChatId(update)))
         );
 
         executor.execute(new SendMessage(

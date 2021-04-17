@@ -1,8 +1,8 @@
 package com.atstudio.spacedlearningbot.telegram.flashcards;
 
 import com.atstudio.spacedlearningbot.domain.Category;
+import com.atstudio.spacedlearningbot.domain.ExcerciseType;
 import com.atstudio.spacedlearningbot.domain.FlashCard;
-import com.atstudio.spacedlearningbot.domain.RepetitionMode;
 import com.atstudio.spacedlearningbot.service.ICategoryService;
 import com.atstudio.spacedlearningbot.service.IFlashCardService;
 import com.atstudio.spacedlearningbot.telegram.messages.BotMessageProvider;
@@ -71,7 +71,7 @@ public class AddFlashcardsFlowHandler implements CurrentActivityFlowUpdateProces
 
         Long chatId = getChatId(update);
         Category category = categoryService.getCategoryByAlias(
-                chatId, (String) currentActivity.getDetails().get(CATEGORY_ALIAS)
+                chatId.toString(), (String) currentActivity.getDetails().get(CATEGORY_ALIAS)
         );
 
         flashCardService.addFlashCardToCategory(category, flashCard);
@@ -89,7 +89,7 @@ public class AddFlashcardsFlowHandler implements CurrentActivityFlowUpdateProces
             sendWrongCardFormatMessage(getChatId(update));
             return null;
         }
-        return new FlashCard().withRepetitionMode(RepetitionMode.SELF_CHECK)
+        return new FlashCard().withType(ExcerciseType.SELF_CHECK)
                 .withBiDirectional(messageText.contains("<->"))
                 .withLeft(parts[0].trim())
                 .withRight(parts[1].trim());

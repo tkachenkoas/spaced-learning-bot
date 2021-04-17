@@ -3,13 +3,13 @@ package com.atstudio.spacedlearningbot.database.entity.category;
 import com.atstudio.spacedlearningbot.database.ICategoryDAO;
 import com.atstudio.spacedlearningbot.database.testconfig.InMemoryDbTestContext;
 import com.atstudio.spacedlearningbot.domain.Category;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,13 +21,14 @@ class CategoryDAOImplTest {
 
     @Test
     public void willAddCategory() {
-        long chat = nextChatId();
+        String owner = nextOwnerId();
 
         Category category = new Category()
+                .withOwnerId(owner)
                 .withAlias("alias")
                 .withName("name");
 
-        Category created = underTest.createCategory(chat, category);
+        Category created = underTest.createCategory(category);
 
         assertThat(created).usingRecursiveComparison()
                 .ignoringFields("id")
@@ -36,61 +37,66 @@ class CategoryDAOImplTest {
 
     @Test
     public void willListCategories() {
-        long chat = nextChatId();
+        String owner = nextOwnerId();
 
         Category first = new Category()
+                .withOwnerId(owner)
                 .withAlias("first-alias")
                 .withName("first-name");
-        first = underTest.createCategory(chat, first);
+        first = underTest.createCategory(first);
 
         Category second = new Category()
+                .withOwnerId(owner)
                 .withAlias("second-alias")
                 .withName("second-name");
-        second = underTest.createCategory(chat, second);
+        second = underTest.createCategory(second);
 
-        List<Category> categories = underTest.getCategoriesForChat(chat);
+        List<Category> categories = underTest.getCategoriesForUser(owner);
 
         assertThat(categories).containsExactlyInAnyOrder(first, second);
     }
 
     @Test
     public void willDeleteCategory() {
-        long chat = nextChatId();
+        String owner = nextOwnerId();
 
         Category first = new Category()
                 .withAlias("first-alias")
+                .withOwnerId(owner)
                 .withName("first-name");
-        underTest.createCategory(chat, first);
+        underTest.createCategory(first);
 
         Category second = new Category()
+                .withOwnerId(owner)
                 .withAlias("second-alias")
                 .withName("second-name");
-        underTest.createCategory(chat, second);
+        underTest.createCategory(second);
 
-        assertThat(underTest.getCategoriesForChat(chat)).hasSize(2);
+        assertThat(underTest.getCategoriesForUser(owner)).hasSize(2);
 
-        underTest.deleteCategory(chat, first.getAlias());
+        underTest.deleteCategory(owner, first.getAlias());
 
-        List<Category> remaining = underTest.getCategoriesForChat(chat);
+        List<Category> remaining = underTest.getCategoriesForUser(owner);
         assertThat(remaining).hasSize(1).contains(second);
     }
 
     @Test
     public void willGetByAlias() {
-        long chat = nextChatId();
+        String owner = nextOwnerId();
 
         Category first = new Category()
+                .withOwnerId(owner)
                 .withAlias("alias")
                 .withName("name");
-        first = underTest.createCategory(chat, first);
+        first = underTest.createCategory(first);
 
-        Optional<Category> category = underTest.getCategoryByAlias(chat, "alias");
+        Optional<Category> category = underTest.getCategoryByAlias(owner, "alias");
 
         assertThat(category.get()).isEqualTo(first);
     }
 
-    private long nextChatId() {
-        return new Random().nextLong();
+    private String nextOwnerId() {
+        return RandomStringUtils.randomAlphabetic(5);
     }
 
 }

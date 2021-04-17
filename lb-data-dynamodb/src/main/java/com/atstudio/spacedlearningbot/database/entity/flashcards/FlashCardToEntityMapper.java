@@ -3,8 +3,8 @@ package com.atstudio.spacedlearningbot.database.entity.flashcards;
 import com.atstudio.spacedlearningbot.domain.Category;
 import com.atstudio.spacedlearningbot.domain.FlashCard;
 
-import static com.atstudio.spacedlearningbot.database.entity.flashcards.RepetitionModeToCodeMapper.getCode;
-import static com.atstudio.spacedlearningbot.database.entity.flashcards.RepetitionModeToCodeMapper.getMode;
+import static com.atstudio.spacedlearningbot.database.enummapper.RepetitionModeToCodeMapper.getCode;
+import static com.atstudio.spacedlearningbot.database.enummapper.RepetitionModeToCodeMapper.getMode;
 
 class FlashCardToEntityMapper {
 
@@ -13,7 +13,7 @@ class FlashCardToEntityMapper {
         result.setFlashCardId(flashCard.getId());
         result.setBiDirectional(flashCard.isBiDirectional());
         result.setCategoryId(category.getId());
-        result.setRepetitionMode(getCode(flashCard.getRepetitionMode()));
+        result.setType(getCode(flashCard.getType()));
         result.setLeft(flashCard.getLeft());
         result.setRight(flashCard.getRight());
         return result;
@@ -25,8 +25,8 @@ class FlashCardToEntityMapper {
         flashCard.setRight(entity.getRight());
         flashCard.setBiDirectional(entity.isBiDirectional());
         flashCard.setId(entity.getFlashCardId());
-        flashCard.setRepetitionMode(
-                getMode(entity.getRepetitionMode())
+        flashCard.setType(
+                getMode(entity.getType())
         );
         return flashCard;
     }

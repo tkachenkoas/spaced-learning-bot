@@ -7,7 +7,7 @@ import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 
 class CategoryToEntityMapper {
 
-    static CategoryEntity fromCategory(Category category, Long chatId) {
+    static CategoryEntity fromCategory(Category category) {
         CategoryEntity result = new CategoryEntity();
 
         String alias = requireNonNullElseGet(
@@ -16,7 +16,7 @@ class CategoryToEntityMapper {
         );
 
         result.setAlias(alias);
-        result.setChatId(chatId);
+        result.setOwnerId(category.getOwnerId());
         result.setName(category.getName());
         return result;
     }
@@ -24,7 +24,8 @@ class CategoryToEntityMapper {
     static Category toCategory(CategoryEntity entity) {
         return new Category()
                 .withAlias(entity.getAlias())
-                .withName(entity.getName());
+                .withName(entity.getName())
+                .withOwnerId(entity.getOwnerId());
     }
 
 }

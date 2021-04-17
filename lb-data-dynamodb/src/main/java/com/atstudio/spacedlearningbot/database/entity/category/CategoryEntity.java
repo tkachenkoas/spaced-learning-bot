@@ -11,9 +11,9 @@ public class CategoryEntity {
     @DynamoDBGeneratedUuid(DynamoDBAutoGenerateStrategy.CREATE)
     private String id;
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "ChatIdIndex")
-    @DynamoDBAttribute(attributeName = "chatId")
-    private Long chatId;
+    @DynamoDBIndexHashKey(globalSecondaryIndexName = "OwnerIdIndex")
+    @DynamoDBAttribute(attributeName = "ownerId")
+    private String ownerId;
 
     @DynamoDBAttribute(attributeName = "alias")
     private String alias;
@@ -21,7 +21,4 @@ public class CategoryEntity {
     @DynamoDBAttribute(attributeName = "name")
     private String name;
 
-    public void setChatId(Long chatId) {
-        this.chatId = chatId;
-    }
 }

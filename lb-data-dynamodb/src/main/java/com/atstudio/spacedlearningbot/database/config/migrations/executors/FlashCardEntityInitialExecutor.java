@@ -4,14 +4,13 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
 import com.amazonaws.services.dynamodbv2.model.Projection;
-import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
 import com.atstudio.spacedlearningbot.database.config.migrations.MigrationExecutor;
 import com.atstudio.spacedlearningbot.database.entity.flashcards.FlashCardEntity;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import static com.atstudio.spacedlearningbot.database.config.migrations.DefaultProvisionCapacity.DEFAULT_THROUGHPUT;
+import static com.atstudio.spacedlearningbot.database.config.migrations.DynamoDbTableUtils.DEFAULT_THROUGHPUT;
 
 @Component
 @AllArgsConstructor
@@ -34,7 +33,7 @@ public class FlashCardEntityInitialExecutor implements MigrationExecutor {
     public void execute(AmazonDynamoDB dynamoDB) {
         CreateTableRequest createTableRequest = dynamoDBMapper.generateCreateTableRequest(FlashCardEntity.class);
         createTableRequest.setProvisionedThroughput(
-                new ProvisionedThroughput(10L, 1L)
+                DEFAULT_THROUGHPUT
         );
         createTableRequest.getGlobalSecondaryIndexes()
                 .forEach(index -> {

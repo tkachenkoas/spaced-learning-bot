@@ -2,8 +2,7 @@ package com.atstudio.spacedlearningbot.domain;
 
 import lombok.*;
 
-import java.time.ZonedDateTime;
-import java.util.UUID;
+import java.time.Instant;
 
 @Data
 @Builder
@@ -11,9 +10,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Exercise {
-    private UUID uuid;
-    private FlashCard flashCard;
+    private String id;
+    private String flashCardId;
     private ExerciseDirection direction;
     private int level;
-    private ZonedDateTime nextRepetition;
+    private Instant nextRepetition;
 }

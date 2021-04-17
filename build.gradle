@@ -49,6 +49,13 @@ def buildTaskRequests = gradle.startParameter.taskRequests
 def onlyScApplicationTest = buildTaskRequests.size() == 1 &&
         buildTaskRequests[0].args[0] == ':sc-application:test'
 
+configurations.all {
+    resolutionStrategy {
+        failOnVersionConflict()
+        force 'com.amazonaws:aws-java-sdk-dynamodb:1.11.949'
+    }
+}
+
 subprojects {
 
     it.apply plugin: 'java'

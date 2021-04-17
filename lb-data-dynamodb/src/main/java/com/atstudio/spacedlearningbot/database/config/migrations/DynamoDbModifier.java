@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.atstudio.spacedlearningbot.database.config.migrations.DefaultProvisionCapacity.DEFAULT_THROUGHPUT;
+import static com.atstudio.spacedlearningbot.database.config.migrations.DynamoDbTableUtils.DEFAULT_THROUGHPUT;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toSet;
 

@@ -19,8 +19,8 @@ public class FlashCardEntity {
     @DynamoDBAttribute(attributeName = "biDirectional")
     private boolean biDirectional;
 
-    @DynamoDBAttribute(attributeName = "repetitionMode")
-    private Integer repetitionMode;
+    @DynamoDBAttribute(attributeName = "type")
+    private Integer type;
 
     @DynamoDBAttribute(attributeName = "left")
     private String left;

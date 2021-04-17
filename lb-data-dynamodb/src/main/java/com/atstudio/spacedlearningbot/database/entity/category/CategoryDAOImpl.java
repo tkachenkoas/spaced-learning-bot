@@ -20,8 +20,8 @@ public class CategoryDAOImpl implements ICategoryDAO {
 
     @Override
     @SneakyThrows
-    public Category createCategory(Long chatId, Category category) {
-        CategoryEntity entity = fromCategory(category, chatId);
+    public Category createCategory(Category category) {
+        CategoryEntity entity = fromCategory(category);
         return CategoryToEntityMapper.toCategory(
                 repository.save(entity)
         );
@@ -29,23 +29,23 @@ public class CategoryDAOImpl implements ICategoryDAO {
 
     @Override
     @SneakyThrows
-    public List<Category> getCategoriesForChat(Long chatId) {
-        List<CategoryEntity> categories = repository.findAllByChatId(chatId);
+    public List<Category> getCategoriesForUser(String ownerId) {
+        List<CategoryEntity> categories = repository.findAllByOwnerId(ownerId);
         return categories.stream()
                 .map(CategoryToEntityMapper::toCategory)
                 .collect(toList());
     }
 
     @Override
-    public Optional<Category> getCategoryByAlias(Long chatId, String alias) {
-        return repository.findByChatIdAndAlias(chatId, alias)
+    public Optional<Category> getCategoryByAlias(String ownerId, String alias) {
+        return repository.findByOwnerIdAndAlias(ownerId, alias)
                 .map(CategoryToEntityMapper::toCategory);
     }
 
     @Override
     @SneakyThrows
-    public void deleteCategory(Long chatId, String alias) {
-        repository.deleteByChatIdAndAlias(chatId, alias);
+    public void deleteCategory(String ownerId, String alias) {
+        repository.deleteByOwnerIdAndAlias(ownerId, alias);
     }
 
 }

@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 public class FlashCard {
     private String id;
-    private RepetitionMode repetitionMode;
+    private ExcerciseType type;
     private boolean biDirectional;
     private String left;
     private String right;

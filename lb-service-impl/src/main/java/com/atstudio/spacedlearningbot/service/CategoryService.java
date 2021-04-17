@@ -19,29 +19,29 @@ public class CategoryService implements ICategoryService {
     private final ICategoryDAO categoryDAO;
 
     @Override
-    public List<Category> getCategoriesForChat(Long chatId) {
-        return categoryDAO.getCategoriesForChat(chatId);
+    public List<Category> getCategories(String ownerId) {
+        return categoryDAO.getCategoriesForUser(ownerId);
     }
 
     @Override
-    public Category createCategory(Long chatId, Category category) {
+    public Category createCategory(Category category) {
         validateCategory(category);
         category.setName(category.getName().trim());
-        return categoryDAO.createCategory(chatId, category);
+        return categoryDAO.createCategory(category);
     }
 
     @Override
-    public void deleteCategory(Long chatId, String categoryId) {
-        categoryDAO.deleteCategory(chatId, categoryId);
+    public void deleteCategory(String ownerId, String categoryId) {
+        categoryDAO.deleteCategory(ownerId, categoryId);
     }
 
     @Override
     @Cacheable(
             cacheNames = CATEGORY_CACHE,
-            key = "#chatId+#alias"
+            key = "#ownerId+#alias"
     )
-    public Category getCategoryByAlias(Long chatId, String alias) {
-        return categoryDAO.getCategoryByAlias(chatId, alias)
+    public Category getCategoryByAlias(String ownerId, String alias) {
+        return categoryDAO.getCategoryByAlias(ownerId, alias)
                 .orElseThrow();
     }
 
