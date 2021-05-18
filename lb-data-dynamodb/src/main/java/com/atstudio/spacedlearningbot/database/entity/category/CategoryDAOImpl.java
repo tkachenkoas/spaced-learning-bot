@@ -1,6 +1,9 @@
 package com.atstudio.spacedlearningbot.database.entity.category;
 
 import com.atstudio.spacedlearningbot.database.ICategoryDAO;
+import com.atstudio.spacedlearningbot.database.entity.base.EntityIdMapper;
+import com.atstudio.spacedlearningbot.database.entity.base.EntityType;
+import com.atstudio.spacedlearningbot.database.entity.base.PrimaryKey;
 import com.atstudio.spacedlearningbot.domain.Category;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -30,7 +33,9 @@ public class CategoryDAOImpl implements ICategoryDAO {
     @Override
     @SneakyThrows
     public List<Category> getCategoriesForUser(String ownerId) {
-        List<CategoryEntity> categories = repository.findAllByOwnerId(ownerId);
+        List<CategoryEntity> categories = repository.findAllByOwnerIdAndEntityIdStartingWith(
+                ownerId, EntityType.CATEGORY.getName()
+        );
         return categories.stream()
                 .map(CategoryToEntityMapper::toCategory)
                 .collect(toList());
@@ -44,8 +49,10 @@ public class CategoryDAOImpl implements ICategoryDAO {
 
     @Override
     @SneakyThrows
-    public void deleteCategory(String ownerId, String alias) {
-        repository.deleteByOwnerIdAndAlias(ownerId, alias);
+    public void deleteCategory(String ownerId, String categoryId) {
+        repository.deleteById(new PrimaryKey(
+                ownerId, EntityIdMapper.withPrefix(EntityType.CATEGORY, categoryId)
+        ));
     }
 
 }

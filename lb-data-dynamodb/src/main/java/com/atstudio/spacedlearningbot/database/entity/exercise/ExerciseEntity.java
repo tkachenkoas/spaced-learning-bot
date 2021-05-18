@@ -1,46 +1,33 @@
 package com.atstudio.spacedlearningbot.database.entity.exercise;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
+import com.atstudio.spacedlearningbot.database.entity.base.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.socialsignin.spring.data.dynamodb.marshaller.Instant2IsoDynamoDBMarshaller;
-import org.springframework.data.annotation.Id;
 
 import java.time.Instant;
 
-@DynamoDBTable(tableName = "Exercise")
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class ExerciseEntity {
+public class ExerciseEntity extends BaseEntity {
 
-    @Id
-    @DynamoDBHashKey(attributeName = "id")
-    @DynamoDBGeneratedUuid(DynamoDBAutoGenerateStrategy.CREATE)
-    private String id;
+    static final String ATTRIBUTE_FLASHCARD_ID = "Flashcard_Id";
+    static final String ATTRIBUTE_DIRECTION_CODE = "Direction_Code";
+    static final String ATTRIBUTE_EXERCISE_LEVEL = "Exercise_Level";
+    static final String ATTRIBUTE_NEXT_REPETITION = "Next_Repetition";
 
-    @DynamoDBAttribute(attributeName = "flashCardId")
+    @DynamoDBAttribute(attributeName = ATTRIBUTE_FLASHCARD_ID)
     private String flashCardId;
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "category_id_and_next_repetition")
-    @DynamoDBAttribute(attributeName = "categoryId")
-    private String categoryId;
-
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "owner_id_and_next_repetition")
-    @DynamoDBAttribute(attributeName = "ownerId")
-    private String ownerId;
-
-    @DynamoDBAttribute(attributeName = "directionCode")
+    @DynamoDBAttribute(attributeName = ATTRIBUTE_DIRECTION_CODE)
     private Integer directionCode;
 
-    @DynamoDBAttribute(attributeName = "level")
+    @DynamoDBAttribute(attributeName = ATTRIBUTE_EXERCISE_LEVEL)
     private Integer level;
 
-    @DynamoDBIndexRangeKey(
-            attributeName = "nextRepetition",
-            globalSecondaryIndexNames = {
-                    "owner_id_and_next_repetition",
-                    "category_id_and_next_repetition"
-            }
-    )
-    @DynamoDBAttribute(attributeName = "nextRepetition")
+    @DynamoDBAttribute(attributeName = ATTRIBUTE_NEXT_REPETITION)
     @DynamoDBTypeConverted(converter = Instant2IsoDynamoDBMarshaller.class)
     private Instant nextRepetition;
 

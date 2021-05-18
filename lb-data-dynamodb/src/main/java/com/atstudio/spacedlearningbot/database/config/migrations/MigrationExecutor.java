@@ -1,12 +1,12 @@
 package com.atstudio.spacedlearningbot.database.config.migrations;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import org.springframework.core.Ordered;
+import com.amazonaws.services.dynamodbv2.datamodeling.IDynamoDBMapper;
 
-public interface MigrationExecutor extends Ordered {
+public interface MigrationExecutor {
 
     String getId();
 
-    void execute(AmazonDynamoDB dynamoDB);
+    void execute(AmazonDynamoDB dynamoDB, IDynamoDBMapper dynamoDBMapper);
 
 }

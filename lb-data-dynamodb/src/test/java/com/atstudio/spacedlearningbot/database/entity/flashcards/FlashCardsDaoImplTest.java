@@ -22,6 +22,7 @@ class FlashCardsDaoImplTest {
     @Test
     void willSaveFlashCard() {
         Category category = new Category()
+                .withOwnerId("owner-id")
                 .withId("category-id")
                 .withName("some-name")
                 .withAlias("cat-alias");

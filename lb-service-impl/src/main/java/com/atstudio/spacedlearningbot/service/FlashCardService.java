@@ -37,7 +37,7 @@ public class FlashCardService implements IFlashCardService {
                     createNewExercise(saved, REVERSED)
             );
         }
-        exerciseDao.save(exercises, category);
+        exerciseDao.save(exercises, category.getOwnerId());
     }
 
     private Exercise createNewExercise(FlashCard flashCard, ExerciseDirection direction) {

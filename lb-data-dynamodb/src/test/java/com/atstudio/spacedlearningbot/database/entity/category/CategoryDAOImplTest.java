@@ -64,17 +64,17 @@ class CategoryDAOImplTest {
                 .withAlias("first-alias")
                 .withOwnerId(owner)
                 .withName("first-name");
-        underTest.createCategory(first);
+        first = underTest.createCategory(first);
 
         Category second = new Category()
                 .withOwnerId(owner)
                 .withAlias("second-alias")
                 .withName("second-name");
-        underTest.createCategory(second);
+        second = underTest.createCategory(second);
 
         assertThat(underTest.getCategoriesForUser(owner)).hasSize(2);
 
-        underTest.deleteCategory(owner, first.getAlias());
+        underTest.deleteCategory(owner, first.getId());
 
         List<Category> remaining = underTest.getCategoriesForUser(owner);
         assertThat(remaining).hasSize(1).contains(second);

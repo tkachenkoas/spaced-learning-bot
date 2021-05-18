@@ -3,5 +3,6 @@ ext {
     ehCacheVersion = '3.9.0'
     javaCacheApi = '1.1.1'
 
-    dynamoDbLocal = '1.11.477'
+    dynamoDbLocal = '1.15.0'
+    awsSdkVersion = '1.11.1020'
 }

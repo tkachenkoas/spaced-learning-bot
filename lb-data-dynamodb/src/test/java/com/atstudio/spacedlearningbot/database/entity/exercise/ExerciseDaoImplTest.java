@@ -3,7 +3,6 @@ package com.atstudio.spacedlearningbot.database.entity.exercise;
 import com.atstudio.spacedlearningbot.commons.CurrentTimeProvider;
 import com.atstudio.spacedlearningbot.database.IExerciseDao;
 import com.atstudio.spacedlearningbot.database.testconfig.InMemoryDbTestContext;
-import com.atstudio.spacedlearningbot.domain.Category;
 import com.atstudio.spacedlearningbot.domain.Exercise;
 import org.assertj.core.data.TemporalUnitWithinOffset;
 import org.junit.jupiter.api.Test;
@@ -39,8 +38,7 @@ class ExerciseDaoImplTest {
                         .withNextRepetition(Instant.now())
         );
 
-        Category category = new Category().withId("some-category-id");
-        List<Exercise> saved = underTest.save(exercises, category);
+        List<Exercise> saved = underTest.save(exercises, "owner-id");
         assertThat(saved).hasSize(1);
         assertThat(saved.get(0))
                 .usingRecursiveComparison()
@@ -67,10 +65,7 @@ class ExerciseDaoImplTest {
                         .withNextRepetition(now)
         );
 
-        Category category = new Category()
-                .withOwnerId("owner-id")
-                .withId("some-category-id");
-        underTest.save(exercises, category);
+        underTest.save(exercises, "owner-id");
         when(currentTimeProviderMock.getCurrentTime())
                 .thenReturn(now.minusSeconds(5));
 

@@ -13,5 +13,5 @@ public interface ICategoryDAO {
 
     Optional<Category> getCategoryByAlias(String ownerId, String alias);
 
-    void deleteCategory(String ownerId, String alias);
+    void deleteCategory(String ownerId, String categoryId);
 }

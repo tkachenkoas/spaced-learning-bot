@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ExerciseEntityRepository extends CrudRepository<ExerciseEntity, String> {
 
-    List<ExerciseEntity> findAllByOwnerIdAndNextRepetitionBefore(String ownerId, Instant moment);
+    List<ExerciseEntity> findTop20ByOwnerIdAndNextRepetitionBefore(String ownerId, Instant moment);
 
 }

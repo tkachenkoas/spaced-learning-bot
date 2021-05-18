@@ -1,24 +1,19 @@
 package com.atstudio.spacedlearningbot.database.entity.category;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.atstudio.spacedlearningbot.database.entity.base.BaseEntity;
 import lombok.Data;
 
-@DynamoDBTable(tableName = "Category")
 @Data
-public class CategoryEntity {
+public class CategoryEntity extends BaseEntity {
 
-    @DynamoDBHashKey(attributeName = "id")
-    @DynamoDBGeneratedUuid(DynamoDBAutoGenerateStrategy.CREATE)
-    private String id;
+    static final String ATTRIBUTE_CATEGORY_ALIAS = "Category_Alias";
+    static final String ATTRIBUTE_CATEGORY_NAME = "Category_Name";
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "OwnerIdIndex")
-    @DynamoDBAttribute(attributeName = "ownerId")
-    private String ownerId;
-
-    @DynamoDBAttribute(attributeName = "alias")
+    @DynamoDBAttribute(attributeName = ATTRIBUTE_CATEGORY_ALIAS)
     private String alias;
 
-    @DynamoDBAttribute(attributeName = "name")
+    @DynamoDBAttribute(attributeName = ATTRIBUTE_CATEGORY_NAME)
     private String name;
 
 }

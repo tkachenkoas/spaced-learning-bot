@@ -4,5 +4,5 @@ dependencies {
 
     testImplementation project(path: ':lb-data-dynamodb-test')
     implementation 'io.github.boostchicken:spring-data-dynamodb:5.2.1'
-    implementation('com.amazonaws:aws-java-sdk-dynamodb:1.11.949')
+    implementation "com.amazonaws:aws-java-sdk-dynamodb:$awsSdkVersion"
 }
