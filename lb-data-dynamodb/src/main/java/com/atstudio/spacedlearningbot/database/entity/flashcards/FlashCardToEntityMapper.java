@@ -13,16 +13,20 @@ import static java.util.Objects.requireNonNullElseGet;
 
 class FlashCardToEntityMapper {
 
+    static PrimaryKey toPrimaryKey(String ownerId, String flashCardId) {
+        return new PrimaryKey(
+                ownerId,
+                EntityIdMapper.withPrefix(EntityType.FLASHCARD, flashCardId)
+        );
+    }
+
     static FlashCardEntity toEntity(Category category, FlashCard flashCard) {
         FlashCardEntity result = new FlashCardEntity();
         String flashCardId = requireNonNullElseGet(
                 flashCard.getId(), IdentifierGenerator::longId
         );
         result.setPrimaryKey(
-                new PrimaryKey(
-                        category.getOwnerId(),
-                        EntityIdMapper.withPrefix(EntityType.FLASHCARD, flashCardId)
-                )
+                toPrimaryKey(category.getOwnerId(), flashCardId)
         );
         result.setBiDirectional(flashCard.isBiDirectional());
         result.setCategoryId(category.getId());
@@ -32,7 +36,7 @@ class FlashCardToEntityMapper {
         return result;
     }
 
-    public static FlashCard toFlashCard(FlashCardEntity entity) {
+    static FlashCard toFlashCard(FlashCardEntity entity) {
         FlashCard flashCard = new FlashCard();
         flashCard.setLeft(entity.getLeft());
         flashCard.setRight(entity.getRight());

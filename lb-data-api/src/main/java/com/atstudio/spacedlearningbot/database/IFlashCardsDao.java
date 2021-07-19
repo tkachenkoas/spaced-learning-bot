@@ -11,4 +11,5 @@ public interface IFlashCardsDao {
 
     List<FlashCard> getAllForCategory(Category category);
 
+    List<FlashCard> getFlashcardsByIds(String ownerId, List<String> flashCardIds);
 }

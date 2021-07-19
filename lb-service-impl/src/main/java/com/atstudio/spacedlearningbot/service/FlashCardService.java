@@ -40,6 +40,16 @@ public class FlashCardService implements IFlashCardService {
         exerciseDao.save(exercises, category.getOwnerId());
     }
 
+    @Override
+    public List<Exercise> getExercisesAvailableForRepetition(String ownerId) {
+        return exerciseDao.loadExercisesAwaitingRepetition(ownerId);
+    }
+
+    @Override
+    public List<FlashCard> getFlashcards(String ownerId, List<String> flashCardIds) {
+        return flashCardsDao.getFlashcardsByIds(ownerId, flashCardIds);
+    }
+
     private Exercise createNewExercise(FlashCard flashCard, ExerciseDirection direction) {
         return new Exercise().withDirection(direction)
                 .withFlashCardId(flashCard.getId())

@@ -15,10 +15,12 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static com.atstudio.spacedlearningbot.database.entity.flashcards.FlashCardToEntityMapper.toFlashCard;
+import static com.atstudio.spacedlearningbot.database.entity.flashcards.FlashCardToEntityMapper.toPrimaryKey;
 import static com.atstudio.spacedlearningbot.database.entity.flashcards.FlashCardsForCategoryIndexExecutor.FLASHCARDS_FOR_CATEGORY_INDEX;
+import static com.atstudio.spacedlearningbot.util.BotCollectionUtils.convertList;
+import static java.util.stream.Collectors.toList;
 
 @Repository
 @RequiredArgsConstructor
@@ -51,7 +53,14 @@ public class FlashCardsDaoImpl implements IFlashCardsDao {
 
         PaginatedQueryList<FlashCardEntity> list = dbMapper.query(FlashCardEntity.class, query);
 
-        return list.stream().map(FlashCardToEntityMapper::toFlashCard)
-                .collect(Collectors.toList());
+        return convertList(list, FlashCardToEntityMapper::toFlashCard);
+    }
+
+    @Override
+    public List<FlashCard> getFlashcardsByIds(String ownerId, List<String> flashCardIds) {
+        List<PrimaryKey> primaryKeys = flashCardIds.stream()
+                .map(entityId -> toPrimaryKey(ownerId, entityId))
+                .collect(toList());
+        return convertList(repository.findAllById(primaryKeys), FlashCardToEntityMapper::toFlashCard);
     }
 }

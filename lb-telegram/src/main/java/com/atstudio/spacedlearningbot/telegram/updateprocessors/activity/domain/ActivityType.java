@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum ActivityType {
     CREATE_CATEGORY(0),
     LIST_CATEGORY_ACTIONS(1),
-    REPEAT_FLASHCARDS(2),
+    REPEAT_ALL_FLASHCARDS(2),
     ADD_FLASHCARDS(3),
     DELETE_CATEGORY(4);
 

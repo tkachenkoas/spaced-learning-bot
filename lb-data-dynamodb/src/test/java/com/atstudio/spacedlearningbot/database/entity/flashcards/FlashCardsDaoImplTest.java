@@ -43,5 +43,28 @@ class FlashCardsDaoImplTest {
                 .ignoringFields("id").isEqualTo(toSave);
     }
 
+    @Test
+    void willFindAllByIds() {
+        Category category = new Category()
+                .withOwnerId("owner-id")
+                .withId("category-id")
+                .withName("some-name")
+                .withAlias("cat-alias");
+
+        FlashCard toSave = new FlashCard()
+                .withBiDirectional(true)
+                .withLeft("left")
+                .withRight("right")
+                .withType(SELF_CHECK);
+
+        FlashCard flashCard = underTest.saveFlashCard(category, toSave);
+
+        List<FlashCard> all = underTest.getFlashcardsByIds(category.getOwnerId(), List.of(flashCard.getId()));
+
+        assertThat(all).hasSize(1);
+        assertThat(all.get(0)).usingRecursiveComparison()
+                .ignoringFields("id").isEqualTo(flashCard);
+    }
+
 
 }

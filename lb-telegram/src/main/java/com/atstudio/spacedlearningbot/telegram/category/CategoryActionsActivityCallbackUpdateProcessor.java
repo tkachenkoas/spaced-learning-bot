@@ -3,7 +3,7 @@ package com.atstudio.spacedlearningbot.telegram.category;
 import com.atstudio.spacedlearningbot.telegram.messages.BotMessageProvider;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityCallback;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.callback.ActivityCallbackUpdateProcessor;
-import com.github.tkachenkoas.telegramstarter.api.TgApiExecutor;
+import com.github.tkachenkoas.telegramstarter.TgApiExecutor;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -48,10 +48,10 @@ public class CategoryActionsActivityCallbackUpdateProcessor implements ActivityC
 
     private InlineKeyboardMarkup actionsMarkup(String categoryId) {
         return new InlineKeyboardMarkup(asList(
-                singletonList(keyboardButtonWithCategoryCallback(
+                /*singletonList(keyboardButtonWithCategoryCallback(
                         messageProvider.getMessage("study_category") + " " + STUDY_EMOJI,
-                        categoryId, CREATE_CATEGORY
-                )),
+                        categoryId, REPEAT_FLASHCARDS
+                )),*/
                 singletonList(keyboardButtonWithCategoryCallback(
                         messageProvider.getMessage("add_flashcards") + " " + ADD_EMOJI,
                         categoryId, ADD_FLASHCARDS

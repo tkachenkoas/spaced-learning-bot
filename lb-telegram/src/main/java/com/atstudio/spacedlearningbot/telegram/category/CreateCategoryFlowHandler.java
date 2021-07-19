@@ -8,7 +8,7 @@ import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.api.Act
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.api.CurrentActivityFlowUpdateProcessor;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityType;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.CurrentActivity;
-import com.github.tkachenkoas.telegramstarter.api.TgApiExecutor;
+import com.github.tkachenkoas.telegramstarter.TgApiExecutor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;

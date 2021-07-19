@@ -1,10 +1,11 @@
 package com.atstudio.spacedlearningbot.telegram.category;
 
 import com.atstudio.spacedlearningbot.domain.Category;
+import com.atstudio.spacedlearningbot.service.CurrentOwnerIdHolder;
 import com.atstudio.spacedlearningbot.service.ICategoryService;
 import com.atstudio.spacedlearningbot.telegram.messages.BotMessageProvider;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.command.DirectCommandUpdateProcessor;
-import com.github.tkachenkoas.telegramstarter.api.TgApiExecutor;
+import com.github.tkachenkoas.telegramstarter.TgApiExecutor;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -36,8 +37,8 @@ public class ListCategoriesDirectCommandUpdateProcessor implements DirectCommand
 
     @Override
     public void process(Update update) {
+        List<Category> categories = categoryService.getCategories(CurrentOwnerIdHolder.getCurrentOwnerId());
         Long chatId = getChatId(update);
-        List<Category> categories = categoryService.getCategories(chatId.toString());
         if (categories.isEmpty()) {
             executor.execute(
                     new SendMessage(chatId, messageProvider.getMessage("no_categories_yet"))

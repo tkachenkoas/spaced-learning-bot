@@ -11,7 +11,8 @@ import static java.time.Duration.ofSeconds;
 enum CacheRegions {
     CURRENT_ACTIVITY(ofSeconds(300), CURRENT_ACTIVITY_CACHE),
     DELETE_CATEGORY_ACTIVITY(ofSeconds(300), DELETE_CATEGORY_ACTIVITY_CACHE),
-    CATEGORY(ofSeconds(300), CATEGORY_CACHE);
+    CATEGORY(ofSeconds(300), CATEGORY_CACHE),
+    CURRENT_EXERCISE(ofSeconds(300), CURRENT_STUDY_CACHE);
 
     private final Duration duration;
     private final String cacheName;

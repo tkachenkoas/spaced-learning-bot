@@ -1,10 +1,11 @@
 package com.atstudio.spacedlearningbot.telegram.category;
 
+import com.atstudio.spacedlearningbot.service.CurrentOwnerIdHolder;
 import com.atstudio.spacedlearningbot.service.ICategoryService;
 import com.atstudio.spacedlearningbot.telegram.messages.BotMessageProvider;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityCallback;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.callback.ActivityCallbackUpdateProcessor;
-import com.github.tkachenkoas.telegramstarter.api.TgApiExecutor;
+import com.github.tkachenkoas.telegramstarter.TgApiExecutor;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.Cache;
@@ -50,7 +51,7 @@ public class DeleteCategoryActivityCallbackUpdateProcessor implements ActivityCa
             return;
         }
 
-        categoryService.deleteCategory(chatId.toString(), categoryId);
+        categoryService.deleteCategory(CurrentOwnerIdHolder.getCurrentOwnerId(), categoryId);
         executor.execute(
                 new SendMessage(chatId, messageProvider.getMessage("deleted_category"))
         );

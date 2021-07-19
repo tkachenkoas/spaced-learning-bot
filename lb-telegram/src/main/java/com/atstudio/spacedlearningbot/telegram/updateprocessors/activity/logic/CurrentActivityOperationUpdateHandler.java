@@ -3,7 +3,7 @@ package com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.logic;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.api.CurrentActivityFlowUpdateProcessor;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityType;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.CurrentActivity;
-import com.github.tkachenkoas.telegramstarter.api.RootUpdateHandler;
+import com.github.tkachenkoas.telegramstarter.RootUpdateHandler;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
 

@@ -1,7 +1,7 @@
 package com.atstudio.spacedlearningbot.telegram.updateprocessors.command;
 
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.api.ActivityFinishedEvent;
-import com.github.tkachenkoas.telegramstarter.api.RootUpdateHandler;
+import com.github.tkachenkoas.telegramstarter.RootUpdateHandler;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

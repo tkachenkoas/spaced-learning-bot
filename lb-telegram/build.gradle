@@ -3,7 +3,7 @@ dependencies {
     implementation project(path: ':lb-common', configuration: 'default')
     implementation project(path: ':lb-service-api', configuration: 'default')
 
-    compile 'com.github.tkachenkoas:telegram-bot-starter-kit:1.1.1'
+    compile 'com.github.tkachenkoas:telegram-bot-starter-kit:1.2.0'
 
     implementation 'com.vdurmont:emoji-java:5.1.1'
 }

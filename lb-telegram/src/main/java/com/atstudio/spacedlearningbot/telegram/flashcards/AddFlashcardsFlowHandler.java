@@ -3,6 +3,7 @@ package com.atstudio.spacedlearningbot.telegram.flashcards;
 import com.atstudio.spacedlearningbot.domain.Category;
 import com.atstudio.spacedlearningbot.domain.ExcerciseType;
 import com.atstudio.spacedlearningbot.domain.FlashCard;
+import com.atstudio.spacedlearningbot.service.CurrentOwnerIdHolder;
 import com.atstudio.spacedlearningbot.service.ICategoryService;
 import com.atstudio.spacedlearningbot.service.IFlashCardService;
 import com.atstudio.spacedlearningbot.telegram.messages.BotMessageProvider;
@@ -13,7 +14,7 @@ import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityCallbackSerializer;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.ActivityType;
 import com.atstudio.spacedlearningbot.telegram.updateprocessors.activity.domain.CurrentActivity;
-import com.github.tkachenkoas.telegramstarter.api.TgApiExecutor;
+import com.github.tkachenkoas.telegramstarter.TgApiExecutor;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationEventPublisher;
@@ -71,7 +72,8 @@ public class AddFlashcardsFlowHandler implements CurrentActivityFlowUpdateProces
 
         Long chatId = getChatId(update);
         Category category = categoryService.getCategoryByAlias(
-                chatId.toString(), (String) currentActivity.getDetails().get(CATEGORY_ALIAS)
+                CurrentOwnerIdHolder.getCurrentOwnerId(),
+                (String) currentActivity.getDetails().get(CATEGORY_ALIAS)
         );
 
         flashCardService.addFlashCardToCategory(category, flashCard);
